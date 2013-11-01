@@ -75,73 +75,75 @@
             // 
             // toolStripSeparator9
             // 
-            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             this.toolStripSeparator9.Name = "toolStripSeparator9";
+            resources.ApplyResources(this.toolStripSeparator9, "toolStripSeparator9");
             // 
             // __dropLogin
             // 
-            resources.ApplyResources(this.@__dropLogin, "__dropLogin");
             this.@__dropLogin.BackColor = System.Drawing.Color.LightCoral;
             this.@__dropLogin.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItem13,
             this.@__logpass,
             this.toolStripSeparator10,
             this.@__btlogin});
+            resources.ApplyResources(this.@__dropLogin, "__dropLogin");
             this.@__dropLogin.Name = "__dropLogin";
             this.@__dropLogin.ShowDropDownArrow = false;
             // 
             // toolStripMenuItem13
             // 
-            resources.ApplyResources(this.toolStripMenuItem13, "toolStripMenuItem13");
             this.toolStripMenuItem13.Name = "toolStripMenuItem13";
+            resources.ApplyResources(this.toolStripMenuItem13, "toolStripMenuItem13");
             // 
             // __logpass
             // 
-            resources.ApplyResources(this.@__logpass, "__logpass");
             this.@__logpass.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.@__logpass.Name = "__logpass";
+            resources.ApplyResources(this.@__logpass, "__logpass");
             // 
             // toolStripSeparator10
             // 
-            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             this.toolStripSeparator10.Name = "toolStripSeparator10";
+            resources.ApplyResources(this.toolStripSeparator10, "toolStripSeparator10");
             // 
             // __btlogin
             // 
-            resources.ApplyResources(this.@__btlogin, "__btlogin");
             this.@__btlogin.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.@__btlogin.Name = "__btlogin";
+            resources.ApplyResources(this.@__btlogin, "__btlogin");
             // 
             // toolStripSeparator11
             // 
-            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             this.toolStripSeparator11.Name = "toolStripSeparator11";
+            resources.ApplyResources(this.toolStripSeparator11, "toolStripSeparator11");
             // 
             // __btLanguage
             // 
-            resources.ApplyResources(this.@__btLanguage, "__btLanguage");
             this.@__btLanguage.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.englishToolStripMenuItem,
             this.portugueseToolStripMenuItem});
+            resources.ApplyResources(this.@__btLanguage, "__btLanguage");
             this.@__btLanguage.Name = "__btLanguage";
             // 
             // englishToolStripMenuItem
             // 
             resources.ApplyResources(this.englishToolStripMenuItem, "englishToolStripMenuItem");
             this.englishToolStripMenuItem.Name = "englishToolStripMenuItem";
+            this.englishToolStripMenuItem.Click += new System.EventHandler(this.englishToolStripMenuItem_Click);
             // 
             // portugueseToolStripMenuItem
             // 
-            resources.ApplyResources(this.portugueseToolStripMenuItem, "portugueseToolStripMenuItem");
             this.portugueseToolStripMenuItem.Checked = true;
             this.portugueseToolStripMenuItem.CheckOnClick = true;
             this.portugueseToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            resources.ApplyResources(this.portugueseToolStripMenuItem, "portugueseToolStripMenuItem");
             this.portugueseToolStripMenuItem.Name = "portugueseToolStripMenuItem";
+            this.portugueseToolStripMenuItem.Click += new System.EventHandler(this.portugueseToolStripMenuItem_Click);
             // 
             // __MainDock
             // 
-            resources.ApplyResources(this.@__MainDock, "__MainDock");
             this.@__MainDock.ActiveAutoHideContent = null;
+            resources.ApplyResources(this.@__MainDock, "__MainDock");
             this.@__MainDock.DockBackColor = System.Drawing.SystemColors.AppWorkspace;
             this.@__MainDock.DockBottomPortion = 150D;
             this.@__MainDock.DockLeftPortion = 200D;
@@ -204,6 +206,7 @@
             this.Controls.Add(this.@__MainDock);
             this.Controls.Add(this.@__MenuBar);
             this.Name = "MainForm";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.@__MenuBar.ResumeLayout(false);
             this.@__MenuBar.PerformLayout();
             this.ResumeLayout(false);

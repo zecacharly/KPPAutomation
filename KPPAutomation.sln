@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPPAutomation", "KPPAutomat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPPVision", "..\KPPVision\KPPVision.csproj", "{C3F9C133-946F-43D1-9C82-A6870C0A6ABC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KPPAutomationCore", "..\KPPAutomationCore\KPPAutomationCore.csproj", "{96625E2E-382E-412F-A3BB-95A773F3B8D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,6 +50,21 @@ Global
 		{C3F9C133-946F-43D1-9C82-A6870C0A6ABC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C3F9C133-946F-43D1-9C82-A6870C0A6ABC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C3F9C133-946F-43D1-9C82-A6870C0A6ABC}.Release|x86.ActiveCfg = Release|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.DebugRaspberry|Any CPU.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.DebugRaspberry|Any CPU.Build.0 = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.DebugRaspberry|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.DebugRaspberry|Mixed Platforms.Build.0 = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.DebugRaspberry|x86.ActiveCfg = Debug|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{96625E2E-382E-412F-A3BB-95A773F3B8D8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
