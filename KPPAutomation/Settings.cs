@@ -8,15 +8,22 @@ using System.IO;
 using System.Windows.Forms;
 using VisionModule;
 using System.ComponentModel;
+using KPPAutomationCore;
 
 namespace KPPAutomation {
 
     
-
     public sealed class ApplicationSettings {
 
 
+         private List<UserDef> m_Users = new List<UserDef>();
 
+        public List<UserDef> Users {
+            get { return m_Users; }
+            set { m_Users = value; }
+        }
+
+        public static UserDef SelectedUser = null;
 
 
         #region -  Serialization attributes  -

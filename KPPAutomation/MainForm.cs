@@ -12,6 +12,7 @@ using KPP.Core.Debug;
 using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using VisionModule;
+using KPPAutomationCore;
 
 namespace KPPAutomation {
     public partial class MainForm : Form {
@@ -92,6 +93,11 @@ namespace KPPAutomation {
             ApplicationConfig.BackupExtention = ".bkp";
             ApplicationConfig.BackupFilesToKeep = 5;
             ApplicationConfig.BackupFolderName = "Backup";
+            if (ApplicationConfig.Users.Count == 0) {
+                ApplicationConfig.Users.Add(new UserDef("auto123", Acesslevel.Admin));
+                ApplicationConfig.Users.Add(new UserDef("man", Acesslevel.Man));
+            }
+
 
 
             _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
@@ -124,8 +130,43 @@ namespace KPPAutomation {
                 ApplicationConfig.Vision.ModuleForm.Show(__MainDock);
             }
 
+            AcessManagement.OnAcesslevelChanged += new AcessManagement.AcesslevelChanged(AcessManagement_OnAcesslevelChanged);
 
 
+            if (SetAdmin) {
+                AcessManagement_OnAcesslevelChanged(Acesslevel.Admin); 
+            }
+            else {
+                AcessManagement_OnAcesslevelChanged(Acesslevel.User); 
+            }
+        }
+
+        void AcessManagement_OnAcesslevelChanged(Acesslevel NewLevel) {
+            Boolean state = (NewLevel == Acesslevel.Admin || NewLevel == Acesslevel.Man);
+            
+            __btConfig.Visible = state;
+
+            switch (NewLevel) {
+                case Acesslevel.Admin:
+                    __dropLogin.Text = this.GetResourceText("Admin_Mode");
+                    __dropLogin.Image = new Bitmap(Properties.Resources.AcessUnlock);
+                    __dropLogin.BackColor = Color.LightGreen;
+                    __btlogin.Text = this.GetResourceText("Logout");
+                    break;
+                case Acesslevel.Man:
+                    __dropLogin.Text = this.GetResourceText("Man_mode");
+                    __dropLogin.Image = new Bitmap(Properties.Resources.AcessUnlock);
+                    __dropLogin.BackColor = Color.LightGreen;
+                    break;
+                case Acesslevel.User:
+                    __dropLogin.BackColor = SystemColors.Control;
+                    __dropLogin.Image = new Bitmap(Properties.Resources.Acesslock);
+                    __dropLogin.Text = this.GetResourceText("User_Mode");
+                    __btlogin.Text = this.GetResourceText("Login");
+                    break;
+                default:
+                    break;
+            }
         }
         void __btsaveConf_Click(object sender, EventArgs e) {
             ApplicationConfig.WriteConfigurationFile();
@@ -204,13 +245,21 @@ namespace KPPAutomation {
         }
 
         private void LoadVisionModule() {
-            
-            ApplicationConfig.Vision.StartModule(__MainDock);
-            __MainDock.Refresh();
+            try {
+
+                ApplicationConfig.Vision.StartModule(__MainDock);
+                __MainDock.Refresh();
+            }
+            catch (Exception exp) {
+
+                log.Error(exp);
+            }
         }
 
         private void UnLoadVisionModule() {
-
+            if (ApplicationConfig.Vision.ModuleStarted) {
+                ApplicationConfig.Vision.ModuleForm.Close();
+            }
 
         }
 
@@ -226,7 +275,35 @@ namespace KPPAutomation {
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
-            __MainDock.SaveAsXml(MainDockFile);
+            try {
+                __MainDock.SaveAsXml(MainDockFile);
+                UnLoadVisionModule();
+            }
+            catch (Exception exp) {
+
+                log.Error(exp);
+            }
+        }
+
+        private void __btlogin_Click(object sender, EventArgs e) {
+            if (__btlogin.Text == this.GetResourceText("Login")) {
+                ApplicationSettings.SelectedUser = ApplicationConfig.Users.Find(bypass => bypass.Pass == __logpass.Text);
+                if (ApplicationSettings.SelectedUser != null) {
+                    AcessManagement.AcessLevel = ApplicationSettings.SelectedUser.Level;
+                    __dropLogin.HideDropDown();
+
+
+                }
+            }
+            else {
+
+                __logpass.Text = "";
+
+                AcessManagement.AcessLevel= Acesslevel.User;
+                __dropLogin.HideDropDown();
+
+
+            }
         }
 
     }

@@ -104,10 +104,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\KPPAutomationCore\KPPAutomationCore.csproj">
+      <Project>{96625E2E-382E-412F-A3BB-95A773F3B8D8}</Project>
+      <Name>KPPAutomationCore</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\KPPVision\KPPVision.csproj">
       <Project>{C3F9C133-946F-43D1-9C82-A6870C0A6ABC}</Project>
       <Name>KPPVision</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AcessUnlock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Acesslock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
