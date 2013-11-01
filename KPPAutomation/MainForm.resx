@@ -117,16 +117,205 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="__MenuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
+  <data name="&gt;&gt;__btConfig.Name" xml:space="preserve">
+    <value>__btConfig</value>
+  </data>
+  <data name="&gt;&gt;confirmarToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>880, 491</value>
+  </data>
+  <data name="&gt;&gt;__editnewpass.Name" xml:space="preserve">
+    <value>__editnewpass</value>
+  </data>
+  <data name="__dropLogin.ToolTipText" xml:space="preserve">
+    <value>Redo not avaible</value>
+  </data>
+  <data name="levelToolStripMenuItem.Text" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="userNameToolStripMenuItem.Text" xml:space="preserve">
+    <value>User name:</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
+    <value>toolStripSeparator11</value>
+  </data>
+  <data name="&gt;&gt;__logpass.Name" xml:space="preserve">
+    <value>__logpass</value>
+  </data>
+  <data name="confirmarToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
   <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="__MenuBar.AutoSize" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="__btLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="&gt;&gt;passwordToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="portugueseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 28</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>MainForm</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
+    <value>toolStripSeparator9</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
   <data name="__btConfig.Font" type="System.Drawing.Font, System.Drawing">
     <value>Times New Roman, 14.25pt</value>
+  </data>
+  <data name="&gt;&gt;__MainDock.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="__MainDock.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 443</value>
+  </data>
+  <data name="addUserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="addUserToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add user</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="&gt;&gt;confirmarToolStripMenuItem1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;__MenuBar.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="__dropLogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>82, 45</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="__btLanguage.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="__logpass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="confirmarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 28</value>
+  </data>
+  <data name="__btConfig.Size" type="System.Drawing.Size, System.Drawing">
+    <value>164, 48</value>
+  </data>
+  <data name="__editnewpass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 48</value>
+  </data>
+  <data name="&gt;&gt;__editUsername.Name" xml:space="preserve">
+    <value>__editUsername</value>
+  </data>
+  <data name="__btlogin.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="__dropLogin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;__MenuBar.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="toolStripMenuItem13.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="mostrarPasswordToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show password</value>
+  </data>
+  <data name="__btlogin.Text" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="&gt;&gt;__btLanguage.Name" xml:space="preserve">
+    <value>__btLanguage</value>
+  </data>
+  <data name="__btLanguage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
+    <value>Magenta</value>
+  </data>
+  <data name="&gt;&gt;__logpass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;__MenuBar.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="__dropLogin.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="&gt;&gt;mostrarPasswordToolStripMenuItem.Name" xml:space="preserve">
+    <value>mostrarPasswordToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;__MainDock.Type" xml:space="preserve">
+    <value>WeifenLuo.WinFormsUI.Docking.DockPanel, WeifenLuo.WinFormsUI.Docking, Version=2.5.0.15095, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;__editnewuserpass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;confirmarToolStripMenuItem.Name" xml:space="preserve">
+    <value>confirmarToolStripMenuItem</value>
   </data>
   <data name="__btConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -171,57 +360,20 @@
         p7KLn2eZrCnrNicnpzze48FBZiv9PSz+Awli6+IWIld8AAAAAElFTkSuQmCC
 </value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="__btConfig.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
+  <data name="passwordToolStripMenuItem.Text" xml:space="preserve">
+    <value>Password:</value>
   </data>
-  <data name="__btConfig.Size" type="System.Drawing.Size, System.Drawing">
-    <value>164, 48</value>
+  <data name="&gt;&gt;changePasswordToolStripMenuItem.Name" xml:space="preserve">
+    <value>changePasswordToolStripMenuItem</value>
   </data>
-  <data name="__btConfig.Text" xml:space="preserve">
-    <value>Configurations</value>
+  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
+    <value>toolStripSeparator10</value>
   </data>
-  <data name="toolStripSeparator9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 48</value>
+  <data name="&gt;&gt;portugueseToolStripMenuItem.Name" xml:space="preserve">
+    <value>portugueseToolStripMenuItem</value>
   </data>
-  <data name="toolStripMenuItem13.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="toolStripMenuItem13.Text" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="__logpass.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 6</value>
-  </data>
-  <data name="__btlogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="__btlogin.Text" xml:space="preserve">
-    <value>Login</value>
-  </data>
-  <data name="__editnewpass.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
-  </data>
-  <data name="mostrarPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="mostrarPasswordToolStripMenuItem.Text" xml:space="preserve">
-    <value>Show password</value>
-  </data>
-  <data name="confirmarToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>160, 22</value>
-  </data>
-  <data name="confirmarToolStripMenuItem.Text" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="changePasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="changePasswordToolStripMenuItem.Text" xml:space="preserve">
-    <value>Change Password</value>
+  <data name="__MainDock.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="__editUsername.Size" type="System.Drawing.Size, System.Drawing">
     <value>100, 23</value>
@@ -229,43 +381,76 @@
   <data name="userNameToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
-  <data name="userNameToolStripMenuItem.Text" xml:space="preserve">
-    <value>User name:</value>
+  <data name="&gt;&gt;__MenuBar.Name" xml:space="preserve">
+    <value>__MenuBar</value>
   </data>
-  <data name="__editnewuserpass.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+  <data name="&gt;&gt;__btlogin.Name" xml:space="preserve">
+    <value>__btlogin</value>
+  </data>
+  <data name="__MenuBar.Size" type="System.Drawing.Size, System.Drawing">
+    <value>880, 48</value>
+  </data>
+  <data name="&gt;&gt;__btlogin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;__dropLogin.Name" xml:space="preserve">
+    <value>__dropLogin</value>
+  </data>
+  <data name="&gt;&gt;__btLanguage.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="portugueseToolStripMenuItem.Text" xml:space="preserve">
+    <value>Portuguese</value>
+  </data>
+  <data name="&gt;&gt;__toolStriplevels.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="__dropLogin.Text" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="changePasswordToolStripMenuItem.Text" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
+  <data name="&gt;&gt;portugueseToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addUserToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;levelToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;userNameToolStripMenuItem.Name" xml:space="preserve">
+    <value>userNameToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;__dropLogin.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="__MenuBar.TabIndex" type="System.Int32, mscorlib">
+    <value>21</value>
   </data>
   <data name="passwordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>133, 22</value>
   </data>
-  <data name="passwordToolStripMenuItem.Text" xml:space="preserve">
-    <value>Password:</value>
+  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
+    <value>englishToolStripMenuItem</value>
   </data>
-  <data name="__toolStriplevels.Size" type="System.Drawing.Size, System.Drawing">
-    <value>121, 23</value>
+  <data name="&gt;&gt;__btConfig.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="levelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
+  <data name="&gt;&gt;__MainDock.Name" xml:space="preserve">
+    <value>__MainDock</value>
   </data>
-  <data name="levelToolStripMenuItem.Text" xml:space="preserve">
-    <value>Level</value>
+  <data name="__MenuBar.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
-  <data name="confirmarToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>133, 22</value>
-  </data>
-  <data name="confirmarToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Confirm</value>
-  </data>
-  <data name="addUserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>168, 22</value>
-  </data>
-  <data name="addUserToolStripMenuItem.Text" xml:space="preserve">
-    <value>Add user</value>
+  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="__dropLogin.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAreSURBVGhD7VlpbFTXFZ55ywBdWNJ0UwJBLFFoEdCSpk2L
+        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAreSURBVGhD7VlpbFTXFZ55ywBdWNJ0UwJBLFFoEdCSpk2L
         uhDSqlXTHwWktqqUCIoqK9AFaER+0Edjo9QLxuuM7ZmxxzPj3WC873YNxHu84RUMxDYhJoSYTRiwfU+/
         82bGMVSJbIsx+VFLn971zF3Ouec73znPNhj+//PgDZSWln6xqKho04kTJ3ZlZ2cfYGRkZOzKzMzcxN99
         bu+roqJiXXFxsSM/P39E0zQRFhYmYmJiRFdXF0VFRYnAwECRlpY24nQ6Hbm5ues+N47wrZaXl8eUlJRM
@@ -315,279 +500,124 @@
         AElFTkSuQmCC
 </value>
   </data>
-  <data name="__dropLogin.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="__dropLogin.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="__dropLogin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>82, 45</value>
-  </data>
-  <data name="__dropLogin.Text" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="__dropLogin.ToolTipText" xml:space="preserve">
-    <value>Redo not avaible</value>
-  </data>
-  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
-    <value>6, 48</value>
-  </data>
-  <data name="englishToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="englishToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 28</value>
-  </data>
-  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="portugueseToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="portugueseToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 28</value>
-  </data>
-  <data name="portugueseToolStripMenuItem.Text" xml:space="preserve">
-    <value>Portuguese</value>
-  </data>
-  <data name="__btLanguage.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 14pt</value>
-  </data>
-  <data name="__btLanguage.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        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
-</value>
-  </data>
-  <data name="__btLanguage.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
-    <value>None</value>
-  </data>
-  <data name="__btLanguage.ImageTransparentColor" type="System.Drawing.Color, System.Drawing">
-    <value>Magenta</value>
-  </data>
-  <data name="__btLanguage.Size" type="System.Drawing.Size, System.Drawing">
-    <value>45, 45</value>
-  </data>
-  <data name="__MenuBar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="__MenuBar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>880, 48</value>
-  </data>
-  <data name="__MenuBar.TabIndex" type="System.Int32, mscorlib">
-    <value>21</value>
-  </data>
-  <data name="&gt;&gt;__MenuBar.Name" xml:space="preserve">
-    <value>__MenuBar</value>
-  </data>
-  <data name="&gt;&gt;__MenuBar.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__MenuBar.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;__MenuBar.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
-  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>880, 491</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>KPP automation</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Name" xml:space="preserve">
-    <value>toolStripSeparator9</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__dropLogin.Name" xml:space="preserve">
-    <value>__dropLogin</value>
-  </data>
-  <data name="&gt;&gt;__dropLogin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem13.Name" xml:space="preserve">
-    <value>toolStripMenuItem13</value>
-  </data>
-  <data name="&gt;&gt;toolStripMenuItem13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__logpass.Name" xml:space="preserve">
-    <value>__logpass</value>
-  </data>
-  <data name="&gt;&gt;__logpass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Name" xml:space="preserve">
-    <value>toolStripSeparator10</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__btlogin.Name" xml:space="preserve">
-    <value>__btlogin</value>
-  </data>
-  <data name="&gt;&gt;__btlogin.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;changePasswordToolStripMenuItem.Name" xml:space="preserve">
-    <value>changePasswordToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;changePasswordToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__editnewpass.Name" xml:space="preserve">
-    <value>__editnewpass</value>
-  </data>
-  <data name="&gt;&gt;__editnewpass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mostrarPasswordToolStripMenuItem.Name" xml:space="preserve">
-    <value>mostrarPasswordToolStripMenuItem</value>
+  <data name="&gt;&gt;passwordToolStripMenuItem.Name" xml:space="preserve">
+    <value>passwordToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;mostrarPasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;confirmarToolStripMenuItem.Name" xml:space="preserve">
-    <value>confirmarToolStripMenuItem</value>
+  <data name="&gt;&gt;levelToolStripMenuItem.Name" xml:space="preserve">
+    <value>levelToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;confirmarToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="mostrarPasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
   </data>
-  <data name="&gt;&gt;addUserToolStripMenuItem.Name" xml:space="preserve">
-    <value>addUserToolStripMenuItem</value>
+  <data name="confirmarToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
   </data>
-  <data name="&gt;&gt;addUserToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="&gt;&gt;__editnewpass.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;userNameToolStripMenuItem.Name" xml:space="preserve">
-    <value>userNameToolStripMenuItem</value>
+  <data name="toolStripSeparator10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 6</value>
   </data>
-  <data name="&gt;&gt;userNameToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__editUsername.Name" xml:space="preserve">
-    <value>__editUsername</value>
+  <data name="toolStripSeparator11.Size" type="System.Drawing.Size, System.Drawing">
+    <value>6, 48</value>
   </data>
   <data name="&gt;&gt;__editUsername.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;passwordToolStripMenuItem.Name" xml:space="preserve">
-    <value>passwordToolStripMenuItem</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>KPP automation</value>
   </data>
-  <data name="&gt;&gt;passwordToolStripMenuItem.Type" xml:space="preserve">
+  <data name="__MainDock.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 11world</value>
+  </data>
+  <data name="__btLanguage.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 45</value>
+  </data>
+  <data name="&gt;&gt;userNameToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;__editnewuserpass.Name" xml:space="preserve">
-    <value>__editnewuserpass</value>
+  <data name="__MainDock.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 48</value>
   </data>
-  <data name="&gt;&gt;__editnewuserpass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripTextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;levelToolStripMenuItem.Name" xml:space="preserve">
-    <value>levelToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;levelToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__toolStriplevels.Name" xml:space="preserve">
-    <value>__toolStriplevels</value>
-  </data>
-  <data name="&gt;&gt;__toolStriplevels.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;confirmarToolStripMenuItem1.Name" xml:space="preserve">
-    <value>confirmarToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;confirmarToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;toolStripSeparator11.Name" xml:space="preserve">
-    <value>toolStripSeparator11</value>
+  <data name="&gt;&gt;addUserToolStripMenuItem.Name" xml:space="preserve">
+    <value>addUserToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;toolStripSeparator11.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;__btLanguage.Name" xml:space="preserve">
-    <value>__btLanguage</value>
+  <data name="confirmarToolStripMenuItem.Text" xml:space="preserve">
+    <value>Confirm</value>
   </data>
-  <data name="&gt;&gt;__btLanguage.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripDropDownButton, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="__btLanguage.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
   </data>
-  <data name="&gt;&gt;englishToolStripMenuItem.Name" xml:space="preserve">
-    <value>englishToolStripMenuItem</value>
+  <data name="&gt;&gt;__editnewuserpass.Name" xml:space="preserve">
+    <value>__editnewuserpass</value>
+  </data>
+  <data name="changePasswordToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>168, 22</value>
+  </data>
+  <data name="portugueseToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="englishToolStripMenuItem.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 14pt</value>
+  </data>
+  <data name="&gt;&gt;__toolStriplevels.Name" xml:space="preserve">
+    <value>__toolStriplevels</value>
   </data>
   <data name="&gt;&gt;englishToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;portugueseToolStripMenuItem.Name" xml:space="preserve">
-    <value>portugueseToolStripMenuItem</value>
+  <data name="__MainDock.TabIndex" type="System.Int32, mscorlib">
+    <value>22</value>
   </data>
-  <data name="&gt;&gt;portugueseToolStripMenuItem.Type" xml:space="preserve">
+  <data name="levelToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>133, 22</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem13.Name" xml:space="preserve">
+    <value>toolStripMenuItem13</value>
+  </data>
+  <data name="&gt;&gt;__MainDock.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;confirmarToolStripMenuItem1.Name" xml:space="preserve">
+    <value>confirmarToolStripMenuItem1</value>
+  </data>
+  <data name="&gt;&gt;changePasswordToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;__btConfig.Name" xml:space="preserve">
-    <value>__btConfig</value>
-  </data>
-  <data name="&gt;&gt;__btConfig.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>MainForm</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="__btConfig.ImageScaling" type="System.Windows.Forms.ToolStripItemImageScaling, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <data name="__toolStriplevels.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 23</value>
+  </data>
+  <data name="&gt;&gt;toolStripMenuItem13.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="englishToolStripMenuItem.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="__btConfig.Text" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="__editnewuserpass.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 23</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>pt-PT</value>
+  </metadata>
+  <metadata name="__MenuBar.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>
