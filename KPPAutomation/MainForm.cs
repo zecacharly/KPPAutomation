@@ -75,7 +75,7 @@ namespace KPPAutomation {
             }
 
 
-            MainDockFile= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\DockPanel.config");
+            MainDockFile= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\MainDockPanel.config");
 
 
             if (!Directory.Exists(MainDockFile)) {
@@ -95,9 +95,16 @@ namespace KPPAutomation {
 
 
             _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
-            _ConfigForm.__visionenabled.Click += new EventHandler(__visionenabled_Click);
+            _ConfigForm.__PropertySettings.SelectedObject = ApplicationConfig;
 
-            // TOODO check modules
+
+
+            if (ApplicationConfig.Vision.Enabled) {
+                ApplicationConfig.Vision.StartModule();
+            }
+
+
+
 
             if (File.Exists(MainDockFile))
                 try {
@@ -113,16 +120,13 @@ namespace KPPAutomation {
 
             }
 
-
+            if (!ApplicationConfig.Vision.ModuleForm.Visible) {
+                ApplicationConfig.Vision.ModuleForm.Show(__MainDock);
+            }
 
 
 
         }
-
-        void __visionenabled_Click(object sender, EventArgs e) {
-            ApplicationConfig.UseVision = true;
-        }
-
         void __btsaveConf_Click(object sender, EventArgs e) {
             ApplicationConfig.WriteConfigurationFile();
         }
@@ -133,7 +137,7 @@ namespace KPPAutomation {
              
             //TODO Check Modules
 
-            if (ApplicationConfig.UseVision) {
+            if (ApplicationConfig.Vision.Enabled) {
 
                 if (persistString == ApplicationConfig.Vision.ModuleForm.GetType().ToString()) {
                     return ApplicationConfig.Vision.ModuleForm;
@@ -200,8 +204,9 @@ namespace KPPAutomation {
         }
 
         private void LoadVisionModule() {
-            ApplicationConfig.Vision.StartModule();
-            ApplicationConfig.Vision.ModuleForm.Show(__MainDock);
+            
+            ApplicationConfig.Vision.StartModule(__MainDock);
+            __MainDock.Refresh();
         }
 
         private void UnLoadVisionModule() {
@@ -212,12 +217,16 @@ namespace KPPAutomation {
 
         private void __btConfig_Click(object sender, EventArgs e) {
             _ConfigForm.ShowDialog();
-            if (ApplicationConfig.UseVision) {
+            if (ApplicationConfig.Vision.Enabled) {
                 LoadVisionModule();
             }
             else {
                 UnLoadVisionModule();
             }
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
+            __MainDock.SaveAsXml(MainDockFile);
         }
 
     }

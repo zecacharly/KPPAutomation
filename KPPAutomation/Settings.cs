@@ -7,6 +7,7 @@ using KPP.Core.Debug;
 using System.IO;
 using System.Windows.Forms;
 using VisionModule;
+using System.ComponentModel;
 
 namespace KPPAutomation {
 
@@ -41,15 +42,12 @@ namespace KPPAutomation {
         [XmlAttribute]
         public String Name { get; set; }
 
-        private Boolean m_UseVision = false;
-        [XmlAttribute]
-        public Boolean UseVision {
-            get { return m_UseVision; }
-            set { m_UseVision = value; }
-        }
+       
 
         private KPPVision m_Vision = new KPPVision();
         //[XmlIgnore]
+        [Category("Modules Definition")]
+        [TypeConverter(typeof(ExpandableObjectConverter))]
         public KPPVision Vision {
             get { return m_Vision; }
             set { m_Vision = value; }
