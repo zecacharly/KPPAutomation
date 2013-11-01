@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace KPPAutomation {
 
-    public enum KPPAvaibleModules { Vision,Epson }
+    
 
     public sealed class ApplicationSettings {
 
@@ -41,7 +41,7 @@ namespace KPPAutomation {
         public String Name { get; set; }
 
 
-        public List<KPPAvaibleModules> KPPModules = new List<KPPAvaibleModules>();
+        
 
 
         /// <summary>
