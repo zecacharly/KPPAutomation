@@ -121,6 +121,8 @@ namespace KPPAutomation {
 
         private IDockContent GetContentFromPersistString(string persistString) {
 
+
+             
             //TODO Check Modules
 
             //if (ApplicationConfig.KPPModules.Contains(KPPAvaibleModules.Vision)) {
