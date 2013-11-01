@@ -72,6 +72,7 @@
             // 
             resources.ApplyResources(this.@__btConfig, "__btConfig");
             this.@__btConfig.Name = "__btConfig";
+            this.@__btConfig.Click += new System.EventHandler(this.@__btConfig_Click);
             // 
             // toolStripSeparator9
             // 

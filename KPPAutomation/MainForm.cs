@@ -18,6 +18,7 @@ namespace KPPAutomation {
 
         public Boolean SetAdmin = false;
         private static KPPLogger log = new KPPLogger(typeof(MainForm));
+        private ConfigForm _ConfigForm = new ConfigForm();
 
         private String m_AppFile = "";
         public String AppFile {
@@ -81,6 +82,7 @@ namespace KPPAutomation {
                 Directory.CreateDirectory(Path.GetDirectoryName(MainDockFile));
             }
 
+            AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\KPPAutomationSettings.config");
 
             if (!File.Exists(AppFile)) {
                 ApplicationConfig = new ApplicationSettings();
@@ -92,12 +94,8 @@ namespace KPPAutomation {
             ApplicationConfig.BackupFolderName = "Backup";
 
 
-            //if (ApplicationConfig.KPPModules.Count==0) {
-            //    ApplicationConfig.KPPModules.Add(KPPAvaibleModules.Vision);
-
-            //}
-
-
+            _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
+            _ConfigForm.__visionenabled.Click += new EventHandler(__visionenabled_Click);
 
             // TOODO check modules
 
@@ -117,6 +115,16 @@ namespace KPPAutomation {
 
 
 
+
+
+        }
+
+        void __visionenabled_Click(object sender, EventArgs e) {
+            ApplicationConfig.UseVision = true;
+        }
+
+        void __btsaveConf_Click(object sender, EventArgs e) {
+            ApplicationConfig.WriteConfigurationFile();
         }
 
         private IDockContent GetContentFromPersistString(string persistString) {
@@ -125,9 +133,12 @@ namespace KPPAutomation {
              
             //TODO Check Modules
 
-            //if (ApplicationConfig.KPPModules.Contains(KPPAvaibleModules.Vision)) {
+            if (ApplicationConfig.UseVision) {
 
-            //}
+                if (persistString == ApplicationConfig.Vision.ModuleForm.GetType().ToString()) {
+                    return ApplicationConfig.Vision.ModuleForm;
+                }
+            }
 
             //if (persistString == typeof(VisionForm).ToString())
             //    return _ListInspForm;
@@ -185,6 +196,27 @@ namespace KPPAutomation {
                     portugueseToolStripMenuItem.Checked = true;
                     englishToolStripMenuItem.Checked = false;
                 }
+            }
+        }
+
+        private void LoadVisionModule() {
+            ApplicationConfig.Vision.StartModule();
+            ApplicationConfig.Vision.ModuleForm.Show(__MainDock);
+        }
+
+        private void UnLoadVisionModule() {
+
+
+        }
+
+
+        private void __btConfig_Click(object sender, EventArgs e) {
+            _ConfigForm.ShowDialog();
+            if (ApplicationConfig.UseVision) {
+                LoadVisionModule();
+            }
+            else {
+                UnLoadVisionModule();
             }
         }
 
