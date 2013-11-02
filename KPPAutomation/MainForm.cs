@@ -105,8 +105,11 @@ namespace KPPAutomation {
 
 
 
-            if (ApplicationConfig.Vision.Enabled) {
-                ApplicationConfig.Vision.StartModule();
+            foreach (KPPVision item in ApplicationConfig.Visions) {
+
+                if (item.Enabled) {
+                    item.StartModule();
+                }
             }
 
 
@@ -125,19 +128,24 @@ namespace KPPAutomation {
                
 
             }
+            foreach (KPPVision item in ApplicationConfig.Visions) {
 
-            if (!ApplicationConfig.Vision.ModuleForm.Visible) {
-                ApplicationConfig.Vision.ModuleForm.Show(__MainDock);
+                if (!item.ModuleForm.Visible) {
+                    item.ModuleForm.Show(__MainDock);
+                }
+
             }
+
+            
 
             AcessManagement.OnAcesslevelChanged += new AcessManagement.AcesslevelChanged(AcessManagement_OnAcesslevelChanged);
 
 
             if (SetAdmin) {
-                AcessManagement_OnAcesslevelChanged(Acesslevel.Admin); 
+                AcessManagement.AcessLevel = Acesslevel.Admin;
             }
             else {
-                AcessManagement_OnAcesslevelChanged(Acesslevel.User); 
+                AcessManagement.AcessLevel = Acesslevel.User;
             }
         }
 
@@ -178,12 +186,12 @@ namespace KPPAutomation {
              
             //TODO Check Modules
 
-            if (ApplicationConfig.Vision.Enabled) {
+            //if (ApplicationConfig.Vision.Enabled) {
 
-                if (persistString == ApplicationConfig.Vision.ModuleForm.GetType().ToString()) {
-                    return ApplicationConfig.Vision.ModuleForm;
-                }
-            }
+            //    if (persistString == ApplicationConfig.Vision.ModuleForm.GetType().ToString()) {
+            //        return ApplicationConfig.Vision.ModuleForm;
+            //    }
+            //}
 
             //if (persistString == typeof(VisionForm).ToString())
             //    return _ListInspForm;
@@ -244,21 +252,23 @@ namespace KPPAutomation {
             }
         }
 
-        private void LoadVisionModule() {
-            try {
+        //private void LoadVisionModule() {
+        //    try {
 
-                ApplicationConfig.Vision.StartModule(__MainDock);
-                __MainDock.Refresh();
-            }
-            catch (Exception exp) {
+        //        ApplicationConfig.Vision.StartModule(__MainDock);
+        //        __MainDock.Refresh();
+        //    }
+        //    catch (Exception exp) {
 
-                log.Error(exp);
-            }
-        }
+        //        log.Error(exp);
+        //    }
+        //}
 
-        private void UnLoadVisionModule() {
-            if (ApplicationConfig.Vision.ModuleStarted) {
-                ApplicationConfig.Vision.ModuleForm.Close();
+        private void UnLoadVisionModules() {
+            foreach (KPPVision item in ApplicationConfig.Visions) {
+                if (item.ModuleStarted) {
+                    item.StopModule();
+                }
             }
 
         }
@@ -266,18 +276,18 @@ namespace KPPAutomation {
 
         private void __btConfig_Click(object sender, EventArgs e) {
             _ConfigForm.ShowDialog();
-            if (ApplicationConfig.Vision.Enabled) {
-                LoadVisionModule();
-            }
-            else {
-                UnLoadVisionModule();
-            }
+            //if (ApplicationConfig.Vision.Enabled) {
+            //    LoadVisionModule();
+            //}
+            //else {
+            //    UnLoadVisionModule();
+            //}
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e) {
             try {
                 __MainDock.SaveAsXml(MainDockFile);
-                UnLoadVisionModule();
+                UnLoadVisionModules();
             }
             catch (Exception exp) {
 

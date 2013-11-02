@@ -51,13 +51,13 @@ namespace KPPAutomation {
 
        
 
-        private KPPVision m_Vision = new KPPVision();
+        private List<KPPVision> m_Visions = new List<KPPVision>();
         //[XmlIgnore]
         [Category("Modules Definition")]
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public KPPVision Vision {
-            get { return m_Vision; }
-            set { m_Vision = value; }
+        public List<KPPVision> Visions {
+            get { return m_Visions; }
+            set { m_Visions = value; }
         }
 
 
