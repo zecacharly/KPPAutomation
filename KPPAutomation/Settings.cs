@@ -49,13 +49,13 @@ namespace KPPAutomation {
         [XmlAttribute]
         public String Name { get; set; }
 
-       
 
-        private List<KPPVision> m_Visions = new List<KPPVision>();
+
+        private CustomCollection<KPPVision> m_Visions = new CustomCollection<KPPVision>();
         //[XmlIgnore]
         [Category("Modules Definition")]
         [TypeConverter(typeof(ExpandableObjectConverter))]
-        public List<KPPVision> Visions {
+        public CustomCollection<KPPVision> Visions {
             get { return m_Visions; }
             set { m_Visions = value; }
         }
@@ -66,7 +66,7 @@ namespace KPPAutomation {
         /// </summary>
         public ApplicationSettings() {
             Name = "Application Settings";
-           
+            //Visions.Add
 
         }
 
