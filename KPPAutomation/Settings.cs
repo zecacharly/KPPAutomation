@@ -9,10 +9,89 @@ using System.Windows.Forms;
 using VisionModule;
 using System.ComponentModel;
 using KPPAutomationCore;
+using System.Drawing.Design;
+using VisionModule.Forms;
+using System.Windows.Forms.Design;
 
 namespace KPPAutomation {
 
-    
+
+    public class ModuleAddRemoveSelector : System.Drawing.Design.UITypeEditor {
+        // this is a container for strings, which can be 
+        // picked-out
+        //UserControl contextcontrol = StaticObjects.InputItemSelectorControl;
+        private static KPPLogger log = new KPPLogger(typeof(ModuleAddRemoveSelector));
+        public ModuleAddRemoveForm form = new ModuleAddRemoveForm();
+
+        IWindowsFormsEditorService edSvc;
+        // this is a string array for drop-down list
+        //internal static List<CameraInfo> RemoteCameras = new List<CameraInfo>();
+
+
+
+
+
+        public ModuleAddRemoveSelector() {
+            //menu.BorderStyle = BorderStyle.None;
+            // add event handler for drop-down box when item 
+            // will be selected
+            //  textbox1.KeyDown += new KeyEventHandler(textebox1_KeyDown);
+
+            //contextcontrol.VisibleChanged += new EventHandler(contextcontrol_VisibleChanged);
+        }
+
+
+
+
+        void textebox1_KeyDown(object sender, KeyEventArgs e) {
+            if (e.KeyCode == Keys.Enter) {
+                edSvc.CloseDropDown();
+            }
+        }
+
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+            return UITypeEditorEditStyle.Modal;
+        }
+
+        // Displays the UI for value selection.
+        public override object EditValue(System.ComponentModel.ITypeDescriptorContext context, System.IServiceProvider provider, object value) {
+
+
+
+
+            ApplicationSettings settings = context.Instance as ApplicationSettings;
+            
+
+            edSvc =
+               (IWindowsFormsEditorService)provider.
+               GetService(typeof
+               (IWindowsFormsEditorService));
+
+            if (edSvc != null) {
+
+                // form.SelectedProject = StaticObjects.SelectedProject;
+
+                form.AppSettings = settings;
+                if (edSvc.ShowDialog(form) == DialogResult.OK) {
+
+                }
+
+
+                //if (textbox1.Text != "") {
+                //    newresref.ResultReferenceID = textbox1.Text;
+                //    newresref.ResultOutput = double.Parse(textbox1.Text);
+                //    return newresref;
+                //}
+
+            }
+            return value;
+        }
+
+
+
+    }
+
+
     public sealed class ApplicationSettings {
 
 
@@ -54,7 +133,7 @@ namespace KPPAutomation {
         private CustomCollection<KPPVision> m_Visions = new CustomCollection<KPPVision>();
         //[XmlIgnore]
         [Category("Modules Definition")]
-        [TypeConverter(typeof(ExpandableObjectConverter))]
+        [TypeConverter(typeof(ExpandableObjectConverter)), EditorAttribute(typeof(ModuleAddRemoveSelector), typeof(UITypeEditor))]
         public CustomCollection<KPPVision> Visions {
             get { return m_Visions; }
             set { m_Visions = value; }

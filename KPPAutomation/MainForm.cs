@@ -60,6 +60,9 @@ namespace KPPAutomation {
         }
 
         private void MainForm_Load(object sender, EventArgs e) {
+
+            DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
+            
             switch (Program.Language) {
                 case Program.LanguageName.Unk:
                     break;
@@ -128,6 +131,10 @@ namespace KPPAutomation {
                
 
             }
+
+            if (!_LogForm.Visible) {
+                _LogForm.Show(__MainDock);
+            }
             foreach (KPPVision item in ApplicationConfig.Visions) {
 
                 if (!item.ModuleForm.Visible) {
@@ -148,6 +155,39 @@ namespace KPPAutomation {
                 AcessManagement.AcessLevel = Acesslevel.User;
             }
         }
+
+        LogForm _LogForm = new LogForm();
+
+        void ActiveDebugController_OnDebugMessage(object sender, DebugMessageArgs e) {
+            if (InvokeRequired) {
+                BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
+            }
+            else {
+
+                switch (e.MessageType) {
+                    case MessageType.Debug:
+                        break;
+                    case MessageType.Error:
+                        _LogForm.__tabControlLog.SelectedTab = _LogForm.__tabexceptions;
+                        _LogForm.TimeChangeColor.Enabled = true;
+                        _LogForm.Show();
+                        break;
+                    case MessageType.Fatal:
+                        break;
+                    case MessageType.Information:
+                        break;
+                    case MessageType.Status:
+                        break;
+                    case MessageType.Warning:
+                        break;
+                    default:
+                        break;
+                }
+
+            }
+
+        }
+
 
         void AcessManagement_OnAcesslevelChanged(Acesslevel NewLevel) {
             Boolean state = (NewLevel == Acesslevel.Admin || NewLevel == Acesslevel.Man);
@@ -182,7 +222,8 @@ namespace KPPAutomation {
 
         private IDockContent GetContentFromPersistString(string persistString) {
 
-
+            if (persistString == typeof(LogForm).ToString())
+                return _LogForm;
              
             //TODO Check Modules
 
