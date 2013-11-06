@@ -46,5 +46,16 @@ namespace KPPAutomation {
             }
 
         }
+
+        private void __ListModules_SelectedIndexChanged(object sender, EventArgs e) {
+            if (__ListModules.SelectedIndex>-1) {
+                __btRemoveModule.Enabled = true;
+            }
+        }
+
+        private void __btRemoveModule_Click(object sender, EventArgs e) {
+            AppSettings.Modules.Remove((KPPModule)__ListModules.SelectedObject);
+            __ListModules.Objects = AppSettings.Modules;
+        }
     }
 }

@@ -59,6 +59,7 @@
             this.@__ListModules.UseCompatibleStateImageBehavior = false;
             this.@__ListModules.UseTranslucentSelection = true;
             this.@__ListModules.View = System.Windows.Forms.View.Details;
+            this.@__ListModules.SelectedIndexChanged += new System.EventHandler(this.@__ListModules_SelectedIndexChanged);
             // 
             // __ModuleName
             // 
@@ -82,6 +83,7 @@
             resources.ApplyResources(this.@__btRemoveModule, "__btRemoveModule");
             this.@__btRemoveModule.Name = "__btRemoveModule";
             this.@__btRemoveModule.UseVisualStyleBackColor = true;
+            this.@__btRemoveModule.Click += new System.EventHandler(this.@__btRemoveModule_Click);
             // 
             // __comboModuleTypes
             // 

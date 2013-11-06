@@ -249,34 +249,20 @@ namespace KPPAutomation {
             if (persistString == typeof(LogForm).ToString())
                 return _LogForm;
              
-            //TODO Check Modules
+         
 
-            //if (ApplicationConfig.Vision.Enabled) {
+            foreach (KPPModule item in ApplicationConfig.Modules) {
+                if (item.GetModelForm() != null) {
+                    if (persistString == item.GetModelForm().GetType().ToString()) {
+                        return (IDockContent)item.GetModelForm();
+                    }
+                }
 
-            //    if (persistString == ApplicationConfig.Vision.ModuleForm.GetType().ToString()) {
-            //        return ApplicationConfig.Vision.ModuleForm;
-            //    }
-            //}
+            }
 
-            //if (persistString == typeof(VisionForm).ToString())
-            //    return _ListInspForm;
-            ////else if (persistString == typeof(InspectionOptionsForm).ToString())
-            ////  return _InspectionOptions;
-            //else if (persistString == typeof(ImageContainerForm).ToString())
-            //    return _ImageContainer;
-            //else if (persistString == typeof(ListROIForm).ToString())
-            //    return _ListROIForm;
-            //else if (persistString == typeof(LogForm).ToString())
-            //    return _LogForm;
-            //else if (persistString == typeof(ViewInspections).ToString())
-            //    return _viewinspections;
-            //else if (persistString == typeof(ResultsConfiguration).ToString())
-            //    return _ResultsConfiguration;
-
-            //else {
-
+         
                 return null;
-           // }
+           
         }
 
         private Boolean restartapp(Program.LanguageName lang) {

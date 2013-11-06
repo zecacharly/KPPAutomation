@@ -152,6 +152,9 @@
   <data name="__btAddModule.Text" xml:space="preserve">
     <value>Adicionar Modulo</value>
   </data>
+  <data name="__btRemoveModule.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="__btRemoveModule.Location" type="System.Drawing.Point, System.Drawing">
     <value>376, 235</value>
   </data>

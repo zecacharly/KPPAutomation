@@ -17,7 +17,7 @@ using WeifenLuo.WinFormsUI.Docking;
 namespace KPPAutomation {
 
 
-    public class ModuleAddRemoveSelector : System.Drawing.Design.UITypeEditor {
+    public class ModuleAddRemoveSelector : UITypeEditor {
         // this is a container for strings, which can be 
         // picked-out
         //UserControl contextcontrol = StaticObjects.InputItemSelectorControl;
@@ -99,13 +99,33 @@ namespace KPPAutomation {
     }
 
     #region Custom editor
-    public class AppFileFolderSelector : FolderNameEditor {
+    public class AppFileFolderSelector : UITypeEditor {
 
-        protected override void InitializeDialog(FolderBrowser openFolderDialog) {
+        public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context) {
+            return UITypeEditorEditStyle.Modal;
+        }
+
+        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value) {
+
+            FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Application Settings File Location";
             //openFolderDialog.Title = "Select application configuration file";
-            base.InitializeDialog(openFolderDialog);
-            
+
+
+            if (openFolderDialog.ShowDialog() == DialogResult.OK) {
+
+                openFolderDialog.Dispose();
+                //base.InitializeDialog(openFolderDialog);
+                Uri fullPath = new Uri(openFolderDialog.SelectedPath, UriKind.Absolute);
+                Uri relRoot = new Uri(AppDomain.CurrentDomain.BaseDirectory, UriKind.Absolute);
+
+                String relative = relRoot.MakeRelativeUri(fullPath).ToString();
+                relative = relative.Replace("%20", " ");
+
+                //openFolderDialog.DirectoryPath = relative;
+                return base.EditValue(context, provider, relative);
+            }
+            return base.EditValue(context, provider, value);
         }
     }
 
@@ -126,7 +146,8 @@ namespace KPPAutomation {
         public String FilesLocation {
             get { return m_FilesLocation; }
             set {
-                if (m_FilesLocation!=value) {                    
+                if (m_FilesLocation!=value) {
+                   
                     m_FilesLocation = value;  
                 }
             }
@@ -163,6 +184,9 @@ namespace KPPAutomation {
            
         }
 
+        public override Object GetModelForm() {
+            return ModuleForm;
+        }
 
         private VisionForm m_ModuleForm = null;
         [XmlIgnore]
@@ -187,9 +211,22 @@ namespace KPPAutomation {
                 if (!Directory.Exists(FilesLocation)) {
                     Directory.CreateDirectory(FilesLocation);
                 }
+                String appath = AppDomain.CurrentDomain.BaseDirectory;
+
+
+                
+
+                //DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
+                //AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
 
                 DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
                 AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
+
+                Uri fullPath = new Uri(new Uri(appath), DockFile);
+                DockFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
+
+                fullPath = new Uri(new Uri(appath), AppFile);
+                AppFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
 
                 if (!File.Exists(AppFile)) {
 
@@ -275,6 +312,10 @@ namespace KPPAutomation {
         public virtual void StopModule() {
 
 
+        }
+
+        public virtual Object GetModelForm() {
+            return null;
         }
 
         public KPPModule() {
