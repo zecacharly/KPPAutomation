@@ -36,7 +36,7 @@ namespace KPPAutomation {
 
         private void __btAddModule_Click(object sender, EventArgs e) {
             try {
-                Type tp = Type.GetType(__comboModuleTypes.Text);
+                Type tp = (Type)__comboModuleTypes.SelectedItem;
                 AppSettings.Modules.Add((KPPModule)Activator.CreateInstance(tp));
                 __ListModules.Objects = AppSettings.Modules;
             }

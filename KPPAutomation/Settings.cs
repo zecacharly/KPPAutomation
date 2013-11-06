@@ -77,7 +77,7 @@ namespace KPPAutomation {
                 var lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
                                  from lType in lAssembly.GetTypes()
                                  where lType.IsSubclassOf(typeof(KPPModule))
-                                 select lType.Name).ToArray();
+                                 select lType).ToArray();
                 form.__comboModuleTypes.Items.AddRange(lListOfBs);
                 if (edSvc.ShowDialog(form) == DialogResult.OK) {
 
@@ -98,21 +98,55 @@ namespace KPPAutomation {
 
     }
 
+    #region Custom editor
+    public class AppFileFolderSelector : FolderNameEditor {
+
+        protected override void InitializeDialog(FolderBrowser openFolderDialog) {
+            openFolderDialog.Description = "Application Settings File Location";
+            //openFolderDialog.Title = "Select application configuration file";
+            base.InitializeDialog(openFolderDialog);
+            
+        }
+    }
+
+    #endregion
 
     public class KPPVisionModule : KPPModule {
 
+        private static KPPLogger log = new KPPLogger(typeof(KPPVisionModule));
+
+        [Browsable(false)]
         public override String DockFile {
             get;
             set;
         }
 
+        private String m_FilesLocation = "";
+        [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]        
+        public String FilesLocation {
+            get { return m_FilesLocation; }
+            set {
+                if (m_FilesLocation!=value) {                    
+                    m_FilesLocation = value;  
+                }
+            }
+        }
 
-
+        private String _AppFile = "";
+        [Browsable(false)]
         public override String AppFile {
-            get;
-            set;
+            get {
+                return _AppFile;
+            }
+            set {
+
+                _AppFile = value;
+
+            }
+
 
         }
+
         private String m_ModuleName = "New vision module";
         [XmlAttribute, DisplayName("Module Name")]
         public override String ModuleName {
@@ -148,16 +182,18 @@ namespace KPPAutomation {
 
         public override Boolean StartModule() {
             if (!ModuleStarted) {
-                DockFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\VisionModule" + ModelID + "DockPanel.config");
-                AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config\\VisionModule" + ModelID + ".config");
+
+
+                if (!Directory.Exists(FilesLocation)) {
+                    Directory.CreateDirectory(FilesLocation);
+                }
+
+                DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
+                AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
 
                 if (!File.Exists(AppFile)) {
 
                     VisionSettings.WriteConfiguration(new VisionSettings(), AppFile);
-                }
-
-                if (!Directory.Exists(DockFile)) {
-                    Directory.CreateDirectory(Path.GetDirectoryName(DockFile));
                 }
 
                 ModuleForm = new VisionForm();
@@ -172,8 +208,10 @@ namespace KPPAutomation {
         }
 
         public override void ShowModule(DockPanel dockingpanel) {
-            if (!ModuleForm.Visible) {
-                ModuleForm.Show(dockingpanel);
+            if (ModuleForm!=null) {
+                if (!ModuleForm.Visible) {
+                    ModuleForm.Show(dockingpanel);
+                } 
             }
             
         }
@@ -200,7 +238,7 @@ namespace KPPAutomation {
 
 
         private int m_modelID = -1;
-        [XmlAttribute, DisplayName("Module ID"), ReadOnly(true)]
+        [XmlAttribute, DisplayName("Module ID"), ReadOnly(false)]
         public virtual int ModelID {
             get { return m_modelID; }
             set { m_modelID = value; }

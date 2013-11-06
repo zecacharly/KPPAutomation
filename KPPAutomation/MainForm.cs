@@ -59,98 +59,125 @@ namespace KPPAutomation {
 
         }
 
-        private void MainForm_Load(object sender, EventArgs e) {
+        Thread LoadModulesThread = null;
 
-            DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
-            
-            switch (Program.Language) {
-                case Program.LanguageName.Unk:
-                    break;
-                case Program.LanguageName.PT:
-                    portugueseToolStripMenuItem.Checked = true;
-                    englishToolStripMenuItem.Checked = false;
-                    break;
-                case Program.LanguageName.EN:
-                    portugueseToolStripMenuItem.Checked = false;
-                    englishToolStripMenuItem.Checked = true;
-                    break;
-                default:
-                    break;
-            }
-
-
-            MainDockFile= Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\MainDockPanel.config");
-
-
-            if (!Directory.Exists(MainDockFile)) {
-                Directory.CreateDirectory(Path.GetDirectoryName(MainDockFile));
-            }
-
-            AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\KPPAutomationSettings.config");
-
-            if (!File.Exists(AppFile)) {
-                ApplicationConfig = new ApplicationSettings();
-                ApplicationConfig.WriteConfigurationFile(AppFile);
-            }
-            ApplicationConfig = ApplicationSettings.ReadConfigurationFile(AppFile);
-            ApplicationConfig.BackupExtention = ".bkp";
-            ApplicationConfig.BackupFilesToKeep = 5;
-            ApplicationConfig.BackupFolderName = "Backup";
-            if (ApplicationConfig.Users.Count == 0) {
-                ApplicationConfig.Users.Add(new UserDef("auto123", Acesslevel.Admin));
-                ApplicationConfig.Users.Add(new UserDef("man", Acesslevel.Man));
-            }
-
-
-
-            _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
-            _ConfigForm.__PropertySettings.SelectedObject = ApplicationConfig;
-
-
-
-            foreach (KPPModule item in ApplicationConfig.Modules) {
-
-                if (item.Enabled) {
-                    item.StartModule();
-                }
-            }
-
-
-
-
-            if (File.Exists(MainDockFile))
+        private void DoLoadModules() {
+            Thread.Sleep(2000);
+            BeginInvoke(new MethodInvoker(delegate {
                 try {
-                    __MainDock.LoadFromXml(MainDockFile, m_deserializeDockContent);
+
+                    foreach (KPPModule item in ApplicationConfig.Modules) {
+
+                        if (item.Enabled) {
+                            item.StartModule();
+                        }
+                    }
+
+
+
+
+                    if (File.Exists(MainDockFile))
+                        try {
+                            __MainDock.LoadFromXml(MainDockFile, m_deserializeDockContent);
+                        }
+                        catch (Exception exp) {
+
+                            __MainDock.SaveAsXml(MainDockFile);
+
+                        }
+                    else {
+
+
+                    }
+
+                    if (!_LogForm.Visible) {
+                        _LogForm.Show(__MainDock);
+                    }
+                    foreach (KPPModule item in ApplicationConfig.Modules) {
+                        item.ShowModule(__MainDock);
+
+                    }
                 }
                 catch (Exception exp) {
 
-                    __MainDock.SaveAsXml(MainDockFile);
-
+                    log.Error(exp);
                 }
-            else {
-               
+            }));
+        }
+
+        private void MainForm_Load(object sender, EventArgs e) {
+
+            try {
+                DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
+
+                switch (Program.Language) {
+                    case Program.LanguageName.Unk:
+                        break;
+                    case Program.LanguageName.PT:
+                        portugueseToolStripMenuItem.Checked = true;
+                        englishToolStripMenuItem.Checked = false;
+                        break;
+                    case Program.LanguageName.EN:
+                        portugueseToolStripMenuItem.Checked = false;
+                        englishToolStripMenuItem.Checked = true;
+                        break;
+                    default:
+                        break;
+                }
+
+
+                MainDockFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\MainDockPanel.dock");
+
+
+                if (!Directory.Exists(Path.GetDirectoryName(MainDockFile))) {
+                    Directory.CreateDirectory(Path.GetDirectoryName(MainDockFile));
+                }
+
+                AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\KPPAutomationSettings.app");
+
+                if (!File.Exists(AppFile)) {
+                    ApplicationConfig = new ApplicationSettings();
+                    ApplicationConfig.WriteConfigurationFile(AppFile);
+                }
+                ApplicationConfig = ApplicationSettings.ReadConfigurationFile(AppFile);
+                ApplicationConfig.BackupExtention = ".bkp";
+                ApplicationConfig.BackupFilesToKeep = 5;
+                ApplicationConfig.BackupFolderName = "Backup";
+                if (ApplicationConfig.Users.Count == 0) {
+                    ApplicationConfig.Users.Add(new UserDef("auto123", Acesslevel.Admin));
+                    ApplicationConfig.Users.Add(new UserDef("man", Acesslevel.Man));
+                }
+
+
+
+                _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
+                _ConfigForm.__PropertySettings.SelectedObject = ApplicationConfig;
+
+
+
+                
+
+                AcessManagement.OnAcesslevelChanged += new AcessManagement.AcesslevelChanged(AcessManagement_OnAcesslevelChanged);
+
+
+                if (SetAdmin) {
+                    AcessManagement.AcessLevel = Acesslevel.Admin;
+                }
+                else {
+                    AcessManagement.AcessLevel = Acesslevel.User;
+                }
+
+                __MainDock.Refresh();
+                LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));
+                LoadModulesThread.IsBackground = true;
+                LoadModulesThread.Start();
 
             }
+            catch (Exception exp) {
 
-            if (!_LogForm.Visible) {
-                _LogForm.Show(__MainDock);
+                log.Error(exp);
             }
-            foreach (KPPModule item in ApplicationConfig.Modules) {
-                item.ShowModule(__MainDock);                
-
-            }
-
-            
-
-            AcessManagement.OnAcesslevelChanged += new AcessManagement.AcesslevelChanged(AcessManagement_OnAcesslevelChanged);
-
-
-            if (SetAdmin) {
-                AcessManagement.AcessLevel = Acesslevel.Admin;
-            }
-            else {
-                AcessManagement.AcessLevel = Acesslevel.User;
-            }
+           
         }
 
         LogForm _LogForm = new LogForm();

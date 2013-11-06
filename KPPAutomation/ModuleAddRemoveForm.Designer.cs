@@ -67,7 +67,7 @@
             // 
             // __ModuleType
             // 
-            this.@__ModuleType.AspectName = "ModelType";
+            this.@__ModuleType.AspectName = "ModuleType";
             resources.ApplyResources(this.@__ModuleType, "__ModuleType");
             // 
             // __btAddModule
@@ -86,6 +86,7 @@
             // __comboModuleTypes
             // 
             resources.ApplyResources(this.@__comboModuleTypes, "__comboModuleTypes");
+            this.@__comboModuleTypes.DisplayMember = "Name";
             this.@__comboModuleTypes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.@__comboModuleTypes.FormattingEnabled = true;
             this.@__comboModuleTypes.Name = "__comboModuleTypes";
