@@ -109,8 +109,7 @@ namespace KPPAutomation {
 
             FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Application Settings File Location";
-            //openFolderDialog.Title = "Select application configuration file";
-
+           
 
             if (openFolderDialog.ShowDialog() == DialogResult.OK) {
 
