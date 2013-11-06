@@ -124,6 +124,12 @@
   <data name="__ModuleName.Width" type="System.Int32, mscorlib">
     <value>160</value>
   </data>
+  <data name="__ModuleType.Text" xml:space="preserve">
+    <value>Tipo de Modulo</value>
+  </data>
+  <data name="__ModuleType.Width" type="System.Int32, mscorlib">
+    <value>130</value>
+  </data>
   <data name="__ListModules.EmptyListMsg" xml:space="preserve">
     <value />
   </data>
@@ -132,10 +138,37 @@
     <value>Microsoft Sans Serif, 12pt</value>
   </data>
   <data name="__ListModules.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 340</value>
+    <value>297, 261</value>
+  </data>
+  <data name="__btAddModule.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="__btAddModule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 44</value>
+  </data>
+  <data name="__btAddModule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 34</value>
+  </data>
+  <data name="__btAddModule.Text" xml:space="preserve">
+    <value>Adicionar Modulo</value>
+  </data>
+  <data name="__btRemoveModule.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 235</value>
+  </data>
+  <data name="__btRemoveModule.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 34</value>
+  </data>
+  <data name="__btRemoveModule.Text" xml:space="preserve">
+    <value>Remover Modulo</value>
+  </data>
+  <data name="__comboModuleTypes.Location" type="System.Drawing.Point, System.Drawing">
+    <value>311, 17</value>
+  </data>
+  <data name="__comboModuleTypes.Size" type="System.Drawing.Size, System.Drawing">
+    <value>166, 21</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>705, 360</value>
+    <value>481, 276</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Adicionar / Remover Modulos</value>

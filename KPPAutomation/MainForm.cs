@@ -108,7 +108,7 @@ namespace KPPAutomation {
 
 
 
-            foreach (KPPVision item in ApplicationConfig.Visions) {
+            foreach (KPPModule item in ApplicationConfig.Modules) {
 
                 if (item.Enabled) {
                     item.StartModule();
@@ -135,11 +135,8 @@ namespace KPPAutomation {
             if (!_LogForm.Visible) {
                 _LogForm.Show(__MainDock);
             }
-            foreach (KPPVision item in ApplicationConfig.Visions) {
-
-                if (!item.ModuleForm.Visible) {
-                    item.ModuleForm.Show(__MainDock);
-                }
+            foreach (KPPModule item in ApplicationConfig.Modules) {
+                item.ShowModule(__MainDock);                
 
             }
 
@@ -306,7 +303,7 @@ namespace KPPAutomation {
         //}
 
         private void UnLoadVisionModules() {
-            foreach (KPPVision item in ApplicationConfig.Visions) {
+            foreach (KPPModule item in ApplicationConfig.Modules) {
                 if (item.ModuleStarted) {
                     item.StopModule();
                 }

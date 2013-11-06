@@ -12,6 +12,7 @@ using KPPAutomationCore;
 using System.Drawing.Design;
 using VisionModule.Forms;
 using System.Windows.Forms.Design;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace KPPAutomation {
 
@@ -72,6 +73,12 @@ namespace KPPAutomation {
                 // form.SelectedProject = StaticObjects.SelectedProject;
 
                 form.AppSettings = settings;
+                form.__comboModuleTypes.Items.Clear();
+                var lListOfBs = (from lAssembly in AppDomain.CurrentDomain.GetAssemblies()
+                                 from lType in lAssembly.GetTypes()
+                                 where lType.IsSubclassOf(typeof(KPPModule))
+                                 select lType.Name).ToArray();
+                form.__comboModuleTypes.Items.AddRange(lListOfBs);
                 if (edSvc.ShowDialog(form) == DialogResult.OK) {
 
                 }
@@ -89,6 +96,198 @@ namespace KPPAutomation {
 
 
 
+    }
+
+
+    public class KPPVisionModule : KPPModule {
+
+        public override String DockFile {
+            get;
+            set;
+        }
+
+
+
+        public override String AppFile {
+            get;
+            set;
+
+        }
+        private String m_ModuleName = "New vision module";
+        [XmlAttribute, DisplayName("Module Name")]
+        public override String ModuleName {
+            get { return m_ModuleName; }
+            set { m_ModuleName = value; }
+        }
+
+       
+        [XmlIgnore]
+        public override String ModuleType {
+            get {
+                return this.GetType().ToString();
+            }
+           
+        }
+
+
+        private VisionForm m_ModuleForm = null;
+        [XmlIgnore]
+        [Browsable(false)]
+        public VisionForm ModuleForm {
+            get { return m_ModuleForm; }
+            internal set { m_ModuleForm = value; }
+        }
+
+
+        public override void StartModule(DockPanel dockingpanel) {
+            if (StartModule()) {
+                ModuleForm.Show(dockingpanel);
+            }
+
+        }
+
+        public override Boolean StartModule() {
+            if (!ModuleStarted) {
+                DockFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\VisionModule" + ModelID + "DockPanel.config");
+                AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config\\VisionModule" + ModelID + ".config");
+
+                if (!File.Exists(AppFile)) {
+
+                    VisionSettings.WriteConfiguration(new VisionSettings(), AppFile);
+                }
+
+                if (!Directory.Exists(DockFile)) {
+                    Directory.CreateDirectory(Path.GetDirectoryName(DockFile));
+                }
+
+                ModuleForm = new VisionForm();
+                ModuleForm.ModuleName = ModuleName;
+                ModuleForm.DockFile = DockFile;
+                ModuleForm.Appfile = AppFile;
+
+                ModuleStarted = true;
+            }
+
+            return ModuleStarted;
+        }
+
+        public override void ShowModule(DockPanel dockingpanel) {
+            if (!ModuleForm.Visible) {
+                ModuleForm.Show(dockingpanel);
+            }
+            
+        }
+
+
+        public override void StopModule() {
+            if (ModuleStarted) {
+                ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));
+                ModuleStarted = false;
+            }
+
+        }
+
+
+        public override string ToString() {
+            return ModuleName;
+        }
+    }
+
+    [TypeConverter(typeof(ExpandableObjectConverter))]
+    [XmlInclude(typeof(KPPVisionModule))]
+    public class KPPModule {
+
+
+
+        private int m_modelID = -1;
+        [XmlAttribute, DisplayName("Module ID"), ReadOnly(true)]
+        public virtual int ModelID {
+            get { return m_modelID; }
+            set { m_modelID = value; }
+        }
+
+        [XmlAttribute, DisplayName("Module Name")]
+        public virtual String ModuleName {
+            get;
+            set;
+        }
+
+        private Boolean m_Enabled = false;
+        [XmlAttribute]
+        public virtual Boolean Enabled {
+            get { return m_Enabled; }
+            set { m_Enabled = value; }
+        }
+
+        private String m_ModuleType = "KPP Module";
+        [XmlIgnore]
+        public virtual String ModuleType {
+            get { return m_ModuleType; }
+            private set { m_ModuleType = value; }
+        }
+
+
+        private Boolean m_ModuleStarted = false;
+        [XmlIgnore]
+        public virtual Boolean ModuleStarted {
+            get { return m_ModuleStarted; }
+            internal set { m_ModuleStarted = value; }
+        }
+
+        public virtual void StopModule() {
+
+
+        }
+
+        public KPPModule() {
+            DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
+
+
+
+
+        }
+
+        public KPPModule(String LoadProjectName)
+            : this() {
+        }
+
+        public KPPModule(int LoadProjectID)
+            : this() {
+
+        }
+
+
+        public virtual String DockFile {
+            get;
+            set;
+        }
+
+
+
+        public virtual String AppFile {
+            get;
+            set;
+        }
+
+
+        public virtual Boolean StartModule() {
+
+
+            return ModuleStarted;
+        }
+
+        public virtual void ShowModule(DockPanel dockingpanel) {
+        }
+
+        public virtual void StartModule(DockPanel dockingpanel) {
+
+        }
+
+       
+
+        public override string ToString() {
+            return ModuleName;
+        }
     }
 
 
@@ -130,13 +329,13 @@ namespace KPPAutomation {
 
 
 
-        private CustomCollection<KPPVision> m_Visions = new CustomCollection<KPPVision>();
+        private CustomCollection<KPPModule> m_Modules = new CustomCollection<KPPModule>();
         //[XmlIgnore]
         [Category("Modules Definition")]
         [TypeConverter(typeof(ExpandableObjectConverter)), EditorAttribute(typeof(ModuleAddRemoveSelector), typeof(UITypeEditor))]
-        public CustomCollection<KPPVision> Visions {
-            get { return m_Visions; }
-            set { m_Visions = value; }
+        public CustomCollection<KPPModule> Modules {
+            get { return m_Modules; }
+            set { m_Modules = value; }
         }
 
 
