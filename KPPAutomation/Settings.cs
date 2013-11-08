@@ -255,7 +255,7 @@ namespace KPPAutomation {
 
         public override void StopModule() {
             if (ModuleStarted) {
-                ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));
+                ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));                
                 ModuleStarted = false;
             }
 
@@ -393,16 +393,20 @@ namespace KPPAutomation {
         private String _defaultPath = null;
 
         [XmlIgnore]
+        [Browsable(false)]
         public Int32 BackupFilesToKeep { get; set; }
         [XmlIgnore]
+        [Browsable(false)]
         public String BackupFolderName { get; set; }
         [XmlIgnore]
+        [Browsable(false)]
         public String BackupExtention { get; set; }
 
         #endregion
         private static KPPLogger log = new KPPLogger(typeof(ApplicationSettings));
 
         [XmlAttribute]
+        [ReadOnly(true)]
         public String Name { get; set; }
 
 

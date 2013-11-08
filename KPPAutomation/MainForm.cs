@@ -66,37 +66,9 @@ namespace KPPAutomation {
             BeginInvoke(new MethodInvoker(delegate {
                 try {
 
-                    foreach (KPPModule item in ApplicationConfig.Modules) {
+                   
 
-                        if (item.Enabled) {
-                            item.StartModule();
-                        }
-                    }
-
-
-
-
-                    if (File.Exists(MainDockFile))
-                        try {
-                            __MainDock.LoadFromXml(MainDockFile, m_deserializeDockContent);
-                        }
-                        catch (Exception exp) {
-
-                            __MainDock.SaveAsXml(MainDockFile);
-
-                        }
-                    else {
-
-
-                    }
-
-                    if (!_LogForm.Visible) {
-                        _LogForm.Show(__MainDock);
-                    }
-                    foreach (KPPModule item in ApplicationConfig.Modules) {
-                        item.ShowModule(__MainDock);
-
-                    }
+                 
                 }
                 catch (Exception exp) {
 
@@ -109,7 +81,7 @@ namespace KPPAutomation {
 
             try {
                 DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
-
+                __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
                     case Program.LanguageName.Unk:
                         break;
@@ -166,17 +138,65 @@ namespace KPPAutomation {
                 else {
                     AcessManagement.AcessLevel = Acesslevel.User;
                 }
+                foreach (KPPModule item in ApplicationConfig.Modules) {
+                    try {
 
-                __MainDock.Refresh();
-                LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));
-                LoadModulesThread.IsBackground = true;
-                LoadModulesThread.Start();
+                        if (item.Enabled) {
+                            item.StartModule();
+                        }
+                    }
+                    catch (Exception exp) {
+
+                        log.Error(exp);
+                    }
+                }
+
+
+
+                //foreach (KPPModule item in ApplicationConfig.Modules) {
+                //    item.ShowModule(__MainDock);
+
+
+                //}
+
+                ////__MainDock.
+                if (File.Exists(MainDockFile))
+                    try {
+                        __MainDock.LoadFromXml(MainDockFile, m_deserializeDockContent);
+                    }
+                    catch (Exception exp) {
+
+                       __MainDock.SaveAsXml(MainDockFile);
+
+                    }
+                else {
+
+
+                }
+                if (!_LogForm.Visible) {
+                    _LogForm.Show(__MainDock);
+                }
+
+                foreach (KPPModule item in ApplicationConfig.Modules) {
+                    item.ShowModule(__MainDock);
+
+
+                }
+
+                //__MainDock.Update();
+                //LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));
+                //LoadModulesThread.IsBackground = true;
+                //LoadModulesThread.Start();
 
             }
             catch (Exception exp) {
 
                 log.Error(exp);
             }
+           
+        }
+
+        void __MainDock_ActiveContentChanged(object sender, EventArgs e) {
            
         }
 
@@ -250,11 +270,13 @@ namespace KPPAutomation {
                 return _LogForm;
              
          
-
+            
             foreach (KPPModule item in ApplicationConfig.Modules) {
-                if (item.GetModelForm() != null) {
-                    if (persistString == item.GetModelForm().GetType().ToString()) {
-                        return (IDockContent)item.GetModelForm();
+                object moduleform=item.GetModelForm();
+                if (moduleform != null) {
+                    IDockContent moduledockform = (IDockContent)moduleform;
+                    if (persistString ==item.ModuleName) {
+                        return moduledockform;
                     }
                 }
 
