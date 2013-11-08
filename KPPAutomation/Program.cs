@@ -60,7 +60,10 @@ namespace KPPAutomation {
         static void Main(params String[] prms) {
             bool ok;
             Mutex m = new Mutex(true, "KPP.Automation.Software.v1.0", out ok);
+            
+            
             DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
+
             //String path = Path.GetDirectoryName(Application.ExecutablePath);
            // DebugController.ActiveDebugController = new DebugController(path);
             //log = new KPPLogger(typeof(t));

@@ -21,7 +21,7 @@ namespace KPPAutomation {
         public String ConfPath = "";
         private static KPPLogger log = new KPPLogger(typeof(MainForm));
         private ConfigForm _ConfigForm = new ConfigForm();
-
+        DebugController teste = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
         private String m_AppFile = "";
         public String AppFile {
             get { return m_AppFile; }
@@ -57,30 +57,17 @@ namespace KPPAutomation {
             InitializeComponent();
 
             m_deserializeDockContent = new DeserializeDockContent(GetContentFromPersistString);
-
+          
+            
         }
 
-        Thread LoadModulesThread = null;
+       
 
-        private void DoLoadModules() {
-            Thread.Sleep(2000);
-            BeginInvoke(new MethodInvoker(delegate {
-                try {
-
-                   
-
-                 
-                }
-                catch (Exception exp) {
-
-                    log.Error(exp);
-                }
-            }));
-        }
-
+      
         private void MainForm_Load(object sender, EventArgs e) {
 
             try {
+               
                 DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
                 __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
@@ -193,13 +180,12 @@ namespace KPPAutomation {
                     _LogForm.Show(__MainDock);
                 }
 
-               
 
+                throw new Exception("Teste");
                 //__MainDock.Update();
                 //LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));
                 //LoadModulesThread.IsBackground = true;
-                //LoadModulesThread.Start();
-
+                //LoadModulesThread.Start();              
             }
             catch (Exception exp) {
 

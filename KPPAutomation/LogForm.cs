@@ -14,7 +14,7 @@ using System.Globalization;
 using KPPAutomationCore;
 
 
-namespace VisionModule {
+namespace KPPAutomation {
     internal partial class LogForm : DockContent {
         private static KPPLogger log = new KPPLogger(typeof(LogForm));
         public LogForm() {
@@ -55,7 +55,7 @@ namespace VisionModule {
 
         void ActiveDebugController_OnDebugMessage(object sender, DebugMessageArgs e) {
             try {
-
+                
                 if (InvokeRequired) {
                     BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
                 } else {

@@ -1,4 +1,4 @@
-﻿namespace VisionModule {
+﻿namespace KPPAutomation {
     partial class LogForm {
         /// <summary>
         /// Required designer variable.

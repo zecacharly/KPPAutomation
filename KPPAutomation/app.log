@@ -2,7 +2,7 @@
 <log4net>
   <!--General Logger-->
   <appender name="GeneralLog" type="log4net.Appender.RollingFileAppender">
-    <file value="c:\Logs\KPP\OVS\full.log"/>
+    <file value="config\logs\full.log"/>
     <appendToFile value="true"/>
     <maximumFileSize value="1024KB"/>
     <rollingStyle value="Size"/>
@@ -13,7 +13,7 @@
   </appender>
   <!--Error/Fatal Logger-->
   <appender name="ErrorLog" type="log4net.Appender.RollingFileAppender">
-    <file value="c:\Logs\KPP\OVS\error.log"/>
+    <file value="config\logs\error.log"/>
     <appendToFile value="true"/>
     <maximumFileSize value="1024KB"/>
     <rollingStyle value="Size"/>
@@ -28,7 +28,7 @@
   </appender>
   <!--Info Logger-->
   <appender name="InfoLog" type="log4net.Appender.RollingFileAppender">
-    <file value="c:\Logs\KPP\OVS\info.log"/>
+    <file value="config\logs\info.log"/>
     <appendToFile value="true"/>
     <maximumFileSize value="1024KB"/>
     <rollingStyle value="Size"/>

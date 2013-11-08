@@ -452,7 +452,7 @@ namespace KPPAutomation {
                     result = config;
                 }
                 catch (Exception exp) {
-                    log.Error(exp);
+                    log.Error("ApplicationSettings", exp);
                 }
                 finally {
                     if (reader != null) {
@@ -478,7 +478,7 @@ namespace KPPAutomation {
                 return config;
             }
             catch (Exception exp) {
-                log.Error(exp);
+                log.Error("ApplicationSettings", exp);
             }
             return null;
         }
