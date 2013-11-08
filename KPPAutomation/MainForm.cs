@@ -18,6 +18,7 @@ namespace KPPAutomation {
     public partial class MainForm : Form {
 
         public Boolean SetAdmin = false;
+        public String ConfPath = "";
         private static KPPLogger log = new KPPLogger(typeof(MainForm));
         private ConfigForm _ConfigForm = new ConfigForm();
 
@@ -97,15 +98,17 @@ namespace KPPAutomation {
                         break;
                 }
 
+                if (!Directory.Exists(ConfPath)) {
+                    try {
+                        Directory.CreateDirectory(ConfPath);
+                    } catch (Exception exp) {
 
-                MainDockFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\MainDockPanel.dock");
-
-
-                if (!Directory.Exists(Path.GetDirectoryName(MainDockFile))) {
-                    Directory.CreateDirectory(Path.GetDirectoryName(MainDockFile));
+                        ConfPath = "config";
+                    }
                 }
 
-                AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config\\KPPAutomationSettings.app");
+
+                AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfPath+"\\KPPAutomationSettings.app");
 
                 if (!File.Exists(AppFile)) {
                     ApplicationConfig = new ApplicationSettings();
@@ -121,6 +124,12 @@ namespace KPPAutomation {
                 }
 
 
+                MainDockFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfPath+"\\MainDockPanel.dock");
+
+
+                if (!Directory.Exists(Path.GetDirectoryName(MainDockFile))) {
+                    Directory.CreateDirectory(Path.GetDirectoryName(MainDockFile));
+                }
 
                 _ConfigForm.__btsaveConf.Click += new EventHandler(__btsaveConf_Click);
                 _ConfigForm.__PropertySettings.SelectedObject = ApplicationConfig;
@@ -173,15 +182,18 @@ namespace KPPAutomation {
 
 
                 }
-                if (!_LogForm.Visible) {
-                    _LogForm.Show(__MainDock);
-                }
 
                 foreach (KPPModule item in ApplicationConfig.Modules) {
                     item.ShowModule(__MainDock);
 
 
                 }
+
+                if (!_LogForm.Visible) {
+                    _LogForm.Show(__MainDock);
+                }
+
+               
 
                 //__MainDock.Update();
                 //LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));

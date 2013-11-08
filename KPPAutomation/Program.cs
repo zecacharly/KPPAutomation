@@ -65,16 +65,22 @@ namespace KPPAutomation {
            // DebugController.ActiveDebugController = new DebugController(path);
             //log = new KPPLogger(typeof(t));
             Boolean startadmin = false;
+            String confpath = "";
             if (prms != null && prms.Length > 0) {
-                foreach (String prm in prms) {
-                    switch (prm) {                      
-                        case "-SetAdmin":
-                            startadmin = true;
-                            break;
-                        default:
-                            break;
+
+                for (int i = 0; i < prms.Length; i++) {
+                    if (prms[i] == "-SetAdmin") {
+                        startadmin = true;
+                    } else if (prms[i].Contains("-Conf")) {
+                        String[] strs = prms[i].Split(new String[]{"="},StringSplitOptions.None);
+                        if (strs.Count()==2) {
+                            confpath = strs[1];
+                        }
                     }
+
+
                 }
+
             }
 
             if (ok) {
@@ -87,7 +93,7 @@ namespace KPPAutomation {
                     try {
 
                         runningform.SetAdmin = startadmin;
-
+                        runningform.ConfPath = confpath;
 
                         Restart = false;
                         Application.Run(runningform);
