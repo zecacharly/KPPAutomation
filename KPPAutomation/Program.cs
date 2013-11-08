@@ -63,7 +63,7 @@ namespace KPPAutomation {
             
             
             DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
-
+            
             //String path = Path.GetDirectoryName(Application.ExecutablePath);
            // DebugController.ActiveDebugController = new DebugController(path);
             //log = new KPPLogger(typeof(t));

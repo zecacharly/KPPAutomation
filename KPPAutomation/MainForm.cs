@@ -61,14 +61,13 @@ namespace KPPAutomation {
             
         }
 
-       
-
+        
       
         private void MainForm_Load(object sender, EventArgs e) {
 
             try {
-               
-                DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
+                                
+
                 __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
                     case Program.LanguageName.Unk:
