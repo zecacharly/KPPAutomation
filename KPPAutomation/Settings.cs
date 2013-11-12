@@ -171,7 +171,14 @@ namespace KPPAutomation {
         [XmlAttribute, DisplayName("Module Name")]
         public override String ModuleName {
             get { return m_ModuleName; }
-            set { m_ModuleName = value; }
+            set {
+                if (m_ModuleName!=value) {
+                    m_ModuleName = value;
+                    if (ModuleForm!=null) {
+                        ModuleForm.ModuleName = ModuleName;
+                    }
+                }
+            }
         }
 
        
@@ -218,8 +225,8 @@ namespace KPPAutomation {
                 //DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
                 //AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
 
-                DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
-                AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
+                DockFile = Path.Combine(FilesLocation, ModuleName + "DockPanel.dock");
+                AppFile = Path.Combine(FilesLocation, ModuleName + ".module");
 
                 Uri fullPath = new Uri(new Uri(appath), DockFile);
                 DockFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
@@ -232,8 +239,7 @@ namespace KPPAutomation {
                     VisionSettings.WriteConfiguration(new VisionSettings(), AppFile);
                 }
 
-                ModuleForm = new VisionForm();
-                ModuleForm.ModuleName = ModuleName;
+                ModuleForm = new VisionForm();                
                 ModuleForm.DockFile = DockFile;
                 ModuleForm.Appfile = AppFile;
 
@@ -247,8 +253,11 @@ namespace KPPAutomation {
             if (ModuleForm!=null) {
                 if (!ModuleForm.Visible) {
                     ModuleForm.Show(dockingpanel);
-                } 
+                    
+                }
+                ModuleForm.ModuleName = ModuleName;
             }
+            
             
         }
 
@@ -273,12 +282,12 @@ namespace KPPAutomation {
 
 
 
-        private int m_modelID = -1;
-        [XmlAttribute, DisplayName("Module ID"), ReadOnly(false)]
-        public virtual int ModelID {
-            get { return m_modelID; }
-            set { m_modelID = value; }
-        }
+        //private int m_modelID = -1;
+        //[XmlAttribute, DisplayName("Module ID"), ReadOnly(false)]
+        //public virtual int ModelID {
+        //    get { return m_modelID; }
+        //    set { m_modelID = value; }
+        //}
 
         [XmlAttribute, DisplayName("Module Name")]
         public virtual String ModuleName {
@@ -318,7 +327,7 @@ namespace KPPAutomation {
         }
 
         public KPPModule() {
-            DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
+            
 
 
 

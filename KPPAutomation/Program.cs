@@ -62,7 +62,8 @@ namespace KPPAutomation {
             Mutex m = new Mutex(true, "KPP.Automation.Software.v1.0", out ok);
             
             
-            DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
+            //TODO check folder logs
+            DebugController.ActiveDebugController = new DebugController(Path.Combine(Application.StartupPath,"logs"),fileExtention:".log",enableTelnet:false);
             
             //String path = Path.GetDirectoryName(Application.ExecutablePath);
            // DebugController.ActiveDebugController = new DebugController(path);

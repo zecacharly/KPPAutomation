@@ -40,7 +40,7 @@ namespace KPPAutomation {
         private void LogForm_Load(object sender, EventArgs e) {
             TimeChangeColor.Interval = 500;
             TimeChangeColor.Tick += new EventHandler(TimeChangeColor_Tick);
-            DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
+            
         }
 
         void TimeChangeColor_Tick(object sender, EventArgs e) {
@@ -51,46 +51,6 @@ namespace KPPAutomation {
                 __tabexceptions.BackColor = Color.Transparent;
             }
             
-        }
-
-        void ActiveDebugController_OnDebugMessage(object sender, DebugMessageArgs e) {
-            try {
-                
-                if (InvokeRequired) {
-                    BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
-                } else {
-                    if (e.MessageType == MessageType.Error || e.MessageType == MessageType.Fatal) {
-
-
-                        __textBoxExceptions.Text += e.Message;
-
-
-                        if (__textBoxExceptions.Text.Length > 0) {
-                            __textBoxExceptions.AppendText(Environment.NewLine);
-                        }
-
-                        __textBoxExceptions.Text += Environment.NewLine;
-
-                    } else {
-                        __textBoxWarnings.Text += (e.Message);
-
-                        if (__textBoxWarnings.Text.Length > 0) {
-                            __textBoxWarnings.AppendText(Environment.NewLine);
-                        }
-
-                    }
-                    if (__textBoxExceptions.Text.Length>0) {
-
-                        __textBoxExceptions.SelectionStart = __textBoxExceptions.Text.Length - 1;
-                        __textBoxExceptions.SelectionLength = 0;
-                        __textBoxExceptions.ScrollToCaret(); 
-                    }
-
-                }
-            } catch (Exception exp) {
-                
-                
-            }
         }
 
         

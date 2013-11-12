@@ -21,7 +21,7 @@ namespace KPPAutomation {
         public String ConfPath = "";
         private static KPPLogger log = new KPPLogger(typeof(MainForm));
         private ConfigForm _ConfigForm = new ConfigForm();
-        DebugController teste = new DebugController(Path.Combine(Application.StartupPath, "app.log"));
+        
         private String m_AppFile = "";
         public String AppFile {
             get { return m_AppFile; }
@@ -66,7 +66,8 @@ namespace KPPAutomation {
         private void MainForm_Load(object sender, EventArgs e) {
 
             try {
-                                
+
+                DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
 
                 __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
@@ -198,37 +199,48 @@ namespace KPPAutomation {
         }
 
         LogForm _LogForm = new LogForm();
-
         void ActiveDebugController_OnDebugMessage(object sender, DebugMessageArgs e) {
-            if (InvokeRequired) {
-                BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
-            }
-            else {
+            try {
 
-                switch (e.MessageType) {
-                    case MessageType.Debug:
-                        break;
-                    case MessageType.Error:
-                        _LogForm.__tabControlLog.SelectedTab = _LogForm.__tabexceptions;
-                        _LogForm.TimeChangeColor.Enabled = true;
-                        _LogForm.Show();
-                        break;
-                    case MessageType.Fatal:
-                        break;
-                    case MessageType.Information:
-                        break;
-                    case MessageType.Status:
-                        break;
-                    case MessageType.Warning:
-                        break;
-                    default:
-                        break;
+                if (InvokeRequired) {
+                    BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
                 }
+                else {
+                    if (e.MessageType == MessageType.Error || e.MessageType == MessageType.Fatal) {
+
+
+                        _LogForm.__textBoxExceptions.Text += e.Message;
+
+
+                        if (_LogForm.__textBoxExceptions.Text.Length > 0) {
+                            _LogForm.__textBoxExceptions.AppendText(Environment.NewLine);
+                        }
+
+                        _LogForm.__textBoxExceptions.Text += Environment.NewLine;
+
+                    }
+                    else {
+                        _LogForm.__textBoxWarnings.Text += (e.Message);
+
+                        if (_LogForm.__textBoxWarnings.Text.Length > 0) {
+                            _LogForm.__textBoxWarnings.AppendText(Environment.NewLine);
+                        }
+
+                    }
+                    if (_LogForm.__textBoxExceptions.Text.Length > 0) {
+
+                        _LogForm.__textBoxExceptions.SelectionStart = _LogForm.__textBoxExceptions.Text.Length - 1;
+                        _LogForm.__textBoxExceptions.SelectionLength = 0;
+                        _LogForm.__textBoxExceptions.ScrollToCaret();
+                    }
+
+                }
+            }
+            catch (Exception exp) {
+
 
             }
-
         }
-
 
         void AcessManagement_OnAcesslevelChanged(Acesslevel NewLevel) {
             Boolean state = (NewLevel == Acesslevel.Admin || NewLevel == Acesslevel.Man);
