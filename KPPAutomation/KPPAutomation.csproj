@@ -90,6 +90,7 @@
     <Compile Include="Settings.cs" />
     <EmbeddedResource Include="ConfigForm.pt-PT.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ConfigForm.resx">
       <DependentUpon>ConfigForm.cs</DependentUpon>
