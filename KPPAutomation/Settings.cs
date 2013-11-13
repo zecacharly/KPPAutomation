@@ -152,15 +152,15 @@ namespace KPPAutomation {
             }
         }
 
-        private String _AppFile = "";
+        private String m_ModuleSettings = "";
         [Browsable(false)]
-        public override String AppFile {
+        public override String ModuleSettings {
             get {
-                return _AppFile;
+                return m_ModuleSettings;
             }
             set {
 
-                _AppFile = value;
+                m_ModuleSettings = value;
 
             }
 
@@ -173,9 +173,15 @@ namespace KPPAutomation {
             get { return m_ModuleName; }
             set {
                 if (m_ModuleName!=value) {
+                    String oldvalue = m_ModuleName;
                     m_ModuleName = value;
-                    if (ModuleForm!=null) {
-                        ModuleForm.ModuleName = ModuleName;
+                    if (ModuleForm!=null) {                        
+                        //TODO set language for dialog box
+                        if (MessageBox.Show(this.GetResourceText("Change_Module_Name"), this.GetResourceText("Confirm_option"), MessageBoxButtons.YesNo) == DialogResult.OK) {
+                            
+                            
+                            ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));                
+                        }
                     }
                 }
             }
@@ -209,6 +215,7 @@ namespace KPPAutomation {
             }
 
         }
+        String appath = AppDomain.CurrentDomain.BaseDirectory;
 
         public override Boolean StartModule() {
             if (!ModuleStarted) {
@@ -217,32 +224,26 @@ namespace KPPAutomation {
                 if (!Directory.Exists(FilesLocation)) {
                     Directory.CreateDirectory(FilesLocation);
                 }
-                String appath = AppDomain.CurrentDomain.BaseDirectory;
-
-
-                
-
-                //DockFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + "DockPanel.dock");
-                //AppFile = Path.Combine(FilesLocation, "VisionModule" + ModelID + ".module");
+               
 
                 DockFile = Path.Combine(FilesLocation, ModuleName + "DockPanel.dock");
-                AppFile = Path.Combine(FilesLocation, ModuleName + ".module");
+                ModuleSettings = Path.Combine(FilesLocation, ModuleName + ".module");
 
                 Uri fullPath = new Uri(new Uri(appath), DockFile);
                 DockFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
 
-                fullPath = new Uri(new Uri(appath), AppFile);
-                AppFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
+                fullPath = new Uri(new Uri(appath), ModuleSettings);
+                ModuleSettings = fullPath.LocalPath;// +Path.GetFileName(newpath);
 
-                if (!File.Exists(AppFile)) {
+                if (!File.Exists(ModuleSettings)) {
 
-                    VisionSettings.WriteConfiguration(new VisionSettings(), AppFile);
+                    VisionSettings.WriteConfiguration(new VisionSettings(), ModuleSettings);
                 }
 
                 ModuleForm = new VisionForm();                
                 ModuleForm.DockFile = DockFile;
-                ModuleForm.Appfile = AppFile;
-
+                ModuleForm.ModuleSettingsFile = ModuleSettings;
+                ModuleForm.InitModule();
                 ModuleStarted = true;
             }
 
@@ -274,6 +275,8 @@ namespace KPPAutomation {
         public override string ToString() {
             return ModuleName;
         }
+
+        
     }
 
     [TypeConverter(typeof(ExpandableObjectConverter))]
@@ -351,7 +354,7 @@ namespace KPPAutomation {
 
 
 
-        public virtual String AppFile {
+        public virtual String ModuleSettings {
             get;
             set;
         }

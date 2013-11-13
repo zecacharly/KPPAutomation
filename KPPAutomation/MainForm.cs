@@ -69,6 +69,7 @@ namespace KPPAutomation {
 
                 DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
 
+
                 __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
                     case Program.LanguageName.Unk:
@@ -84,6 +85,9 @@ namespace KPPAutomation {
                     default:
                         break;
                 }
+
+                TextBox __logpasstb = this.__logpass.Control as TextBox;                
+                __logpasstb.PasswordChar = '*'; 
 
                 if (!Directory.Exists(ConfPath)) {
                     try {
