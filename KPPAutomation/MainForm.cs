@@ -68,7 +68,7 @@ namespace KPPAutomation {
             try {
 
                 DebugController.ActiveDebugController.OnDebugMessage += new OnDebugMessageHandler(ActiveDebugController_OnDebugMessage);
-
+                
 
                 __MainDock.ActiveContentChanged += new EventHandler(__MainDock_ActiveContentChanged);
                 switch (Program.Language) {
@@ -102,6 +102,9 @@ namespace KPPAutomation {
                 AppFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfPath+"\\KPPAutomationSettings.app");
 
                 if (!File.Exists(AppFile)) {
+                    if (!Directory.Exists(AppFile)) {
+                        Directory.CreateDirectory(Path.GetDirectoryName(AppFile));
+                    }
                     ApplicationConfig = new ApplicationSettings();
                     ApplicationConfig.WriteConfigurationFile(AppFile);
                 }
@@ -143,6 +146,8 @@ namespace KPPAutomation {
 
                         if (item.Enabled) {
                             item.StartModule();
+                            item.OnModuleNameChanged += new KPPModule.ModuleNameChanged(item_OnModuleNameChanged);
+                        
                         }
                     }
                     catch (Exception exp) {
@@ -174,16 +179,24 @@ namespace KPPAutomation {
 
                 }
 
-                foreach (KPPModule item in ApplicationConfig.Modules) {
-                    item.ShowModule(__MainDock);
-
-
-                }
 
                 if (!_LogForm.Visible) {
                     _LogForm.Show(__MainDock);
                 }
 
+                foreach (KPPModule item in ApplicationConfig.Modules) {
+                    try {
+
+                        if (item.Enabled) {
+                            if (!item.GetModuleForm().Visible) {
+                                item.GetModuleForm().Show(__MainDock);
+                            }
+                        }
+                    } catch (Exception exp) {
+
+                        log.Error(exp);
+                    }
+                }
 
 
                 //__MainDock.Update();
@@ -198,6 +211,20 @@ namespace KPPAutomation {
            
         }
 
+        void item_OnModuleNameChanged(KPPModule module, string OldName) {
+            if (MessageBox.Show(this.GetResourceText("Change_Module_Name"), this.GetResourceText("Confirm_option"), MessageBoxButtons.YesNo) == DialogResult.Yes) {
+                _ConfigForm.Close();
+                Thread.Sleep(100);
+                module.StopModule();
+                module.UpdateModuleNameFiles(OldName,module.ModuleName);
+                ApplicationConfig.WriteConfigurationFile();
+                module.StartModule(__MainDock);
+            }
+        }
+
+       
+
+
         void __MainDock_ActiveContentChanged(object sender, EventArgs e) {
            
         }
@@ -205,7 +232,7 @@ namespace KPPAutomation {
         LogForm _LogForm = new LogForm();
         void ActiveDebugController_OnDebugMessage(object sender, DebugMessageArgs e) {
             try {
-
+                
                 if (InvokeRequired) {
                     BeginInvoke(new MethodInvoker(delegate { ActiveDebugController_OnDebugMessage(sender, e); }));
                 }
@@ -281,14 +308,14 @@ namespace KPPAutomation {
 
             if (persistString == typeof(LogForm).ToString())
                 return _LogForm;
-             
-         
-            
+
+
+
             foreach (KPPModule item in ApplicationConfig.Modules) {
-                object moduleform=item.GetModelForm();
+                object moduleform = item.GetModuleForm();
                 if (moduleform != null) {
                     IDockContent moduledockform = (IDockContent)moduleform;
-                    if (persistString ==item.ModuleName) {
+                    if (persistString == item.ModuleName) {
                         return moduledockform;
                     }
                 }
@@ -353,7 +380,8 @@ namespace KPPAutomation {
         private void UnLoadVisionModules() {
             foreach (KPPModule item in ApplicationConfig.Modules) {
                 if (item.ModuleStarted) {
-                    item.StopModule();
+                    item.GetModuleForm().Close();
+                    //TODDO dispose vision
                 }
             }
 

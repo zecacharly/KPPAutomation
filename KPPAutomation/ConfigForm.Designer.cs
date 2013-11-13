@@ -53,6 +53,7 @@
             resources.ApplyResources(this.@__btsaveConf, "__btsaveConf");
             this.@__btsaveConf.Name = "__btsaveConf";
             this.@__btsaveConf.UseVisualStyleBackColor = true;
+            this.@__btsaveConf.Click += new System.EventHandler(this.@__btsaveConf_Click);
             // 
             // panel1
             // 

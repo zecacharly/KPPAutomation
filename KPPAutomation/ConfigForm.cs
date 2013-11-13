@@ -16,5 +16,9 @@ namespace KPPAutomation {
         private void __btexitconf_Click(object sender, EventArgs e) {
             this.Close();
         }
+
+        private void __btsaveConf_Click(object sender, EventArgs e) {
+
+        }
     }
 }

@@ -109,8 +109,12 @@ namespace KPPAutomation {
 
             FolderBrowserDialog openFolderDialog = new FolderBrowserDialog();
             openFolderDialog.Description = "Application Settings File Location";
-           
 
+            String currentloc = ((KPPModule)context.Instance).ModuleFilesLocation;
+            if (String.IsNullOrEmpty(currentloc)) {
+                currentloc = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            }
+            openFolderDialog.SelectedPath = currentloc;
             if (openFolderDialog.ShowDialog() == DialogResult.OK) {
 
                 openFolderDialog.Dispose();
@@ -131,40 +135,100 @@ namespace KPPAutomation {
     #endregion
 
     public class KPPVisionModule : KPPModule {
+        
+        public override event ModuleNameChanged OnModuleNameChanged;
+        
 
         private static KPPLogger log = new KPPLogger(typeof(KPPVisionModule));
+        private Vision vision;
 
-        [Browsable(false)]
-        public override String DockFile {
-            get;
-            set;
+        
+        private String m_ModuleSettingsFile;
+        [XmlIgnore, Browsable(false)]
+        public override String ModuleSettingsFile {
+            get { return m_ModuleSettingsFile; }
+            set { m_ModuleSettingsFile = value; }
         }
 
-        private String m_FilesLocation = "";
-        [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]        
-        public String FilesLocation {
-            get { return m_FilesLocation; }
-            set {
-                if (m_FilesLocation!=value) {
-                   
-                    m_FilesLocation = value;  
+        public override void UpdateModuleNameFiles(String OldModuleName,String NewModuleName) {
+
+            if (!String.IsNullOrEmpty(NewModuleName)) {                
+                if (!String.IsNullOrEmpty(OldModuleName)) {
+
+                    if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"))) {
+                        File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"), Path.Combine(ModuleFilesLocation, NewModuleName + ".dock"),true);
+                        File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"));
+                    }
+
+                    if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".VisionModule"))) {
+                        File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".VisionModule"), Path.Combine(ModuleFilesLocation, NewModuleName + ".VisionModule"),true);
+                        File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".VisionModule"));
+                    } else {
+                        VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewModuleName, ModuleName + ".VisionModule"));
+                    }
+
                 }
+
+                if (!File.Exists(Path.Combine(ModuleFilesLocation, ModuleName + ".VisionModule"))) {
+
+                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(ModuleFilesLocation, ModuleName + ".VisionModule"));
+                }
+                ModuleSettingsFile = Path.Combine(ModuleFilesLocation, ModuleName + ".VisionModule");
             }
         }
 
-        private String m_ModuleSettings = "";
-        [Browsable(false)]
-        public override String ModuleSettings {
-            get {
-                return m_ModuleSettings;
+        public override void UpdateModuleFilesLocation(String OldLocation, String NewLocation) {
+            if (!String.IsNullOrEmpty(NewLocation)) {
+                if (!Directory.Exists(NewLocation)) {
+                    Directory.CreateDirectory(Path.GetDirectoryName(NewLocation));
+                }
+                if (!String.IsNullOrEmpty(OldLocation)) {
+
+                    if (File.Exists(Path.Combine(OldLocation, ModuleName + ".dock"))) {
+                        File.Copy(Path.Combine(OldLocation, ModuleName + ".dock"), Path.Combine(NewLocation, ModuleName + ".dock"),true);
+                        File.Delete(Path.Combine(OldLocation, ModuleName + ".dock"));
+                    }
+
+                    if (File.Exists(Path.Combine(OldLocation, ModuleName + ".VisionModule"))) {
+                        File.Copy(Path.Combine(OldLocation, ModuleName + ".VisionModule"), Path.Combine(NewLocation, ModuleName + ".VisionModule"),true);
+                        File.Delete(Path.Combine(OldLocation, ModuleName + ".VisionModule"));
+                    } else {
+                        VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
+                    }
+
+                }
+
+                if (!File.Exists(Path.Combine(NewLocation, ModuleName + ".VisionModule"))) {
+
+                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
+                }
+                ModuleSettingsFile = Path.Combine(NewLocation, ModuleName + ".VisionModule");
             }
+        }
+
+        private string m_ModuleFilesLocation;
+        [XmlAttribute, DisplayName("Module Settings location")]
+        [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]
+        public override string ModuleFilesLocation {
+            get { return m_ModuleFilesLocation; }
             set {
+                
 
-                m_ModuleSettings = value;
+                UpdateModuleFilesLocation(m_ModuleName, value);
+
+                m_ModuleFilesLocation = value;
+
+
+
 
             }
+        }
 
+        
 
+        public override DockContent GetModuleForm() {
+
+            return vision.GetVisionForm();
         }
 
         private String m_ModuleName = "New vision module";
@@ -172,17 +236,13 @@ namespace KPPAutomation {
         public override String ModuleName {
             get { return m_ModuleName; }
             set {
-                if (m_ModuleName!=value) {
+                if (m_ModuleName != value) {
                     String oldvalue = m_ModuleName;
                     m_ModuleName = value;
-                    if (ModuleForm!=null) {                        
-                        //TODO set language for dialog box
-                        if (MessageBox.Show(this.GetResourceText("Change_Module_Name"), this.GetResourceText("Confirm_option"), MessageBoxButtons.YesNo) == DialogResult.OK) {
-                            
-                            
-                            ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));                
-                        }
+                    if (OnModuleNameChanged!=null) {
+                        OnModuleNameChanged(this,oldvalue);
                     }
+
                 }
             }
         }
@@ -196,77 +256,32 @@ namespace KPPAutomation {
            
         }
 
-        public override Object GetModelForm() {
-            return ModuleForm;
+
+        public override void StartModule(DockPanel MainDock) {
+            StartModule();
+            vision.GetVisionForm().Show(MainDock);
         }
 
-        private VisionForm m_ModuleForm = null;
-        [XmlIgnore]
-        [Browsable(false)]
-        public VisionForm ModuleForm {
-            get { return m_ModuleForm; }
-            internal set { m_ModuleForm = value; }
-        }
+        public override void StartModule() {
 
-
-        public override void StartModule(DockPanel dockingpanel) {
-            if (StartModule()) {
-                ModuleForm.Show(dockingpanel);
-            }
-
-        }
-        String appath = AppDomain.CurrentDomain.BaseDirectory;
-
-        public override Boolean StartModule() {
             if (!ModuleStarted) {
 
-
-                if (!Directory.Exists(FilesLocation)) {
-                    Directory.CreateDirectory(FilesLocation);
-                }
-               
-
-                DockFile = Path.Combine(FilesLocation, ModuleName + "DockPanel.dock");
-                ModuleSettings = Path.Combine(FilesLocation, ModuleName + ".module");
-
-                Uri fullPath = new Uri(new Uri(appath), DockFile);
-                DockFile = fullPath.LocalPath;// +Path.GetFileName(newpath);
-
-                fullPath = new Uri(new Uri(appath), ModuleSettings);
-                ModuleSettings = fullPath.LocalPath;// +Path.GetFileName(newpath);
-
-                if (!File.Exists(ModuleSettings)) {
-
-                    VisionSettings.WriteConfiguration(new VisionSettings(), ModuleSettings);
-                }
-
-                ModuleForm = new VisionForm();                
-                ModuleForm.DockFile = DockFile;
-                ModuleForm.ModuleSettingsFile = ModuleSettings;
-                ModuleForm.InitModule();
+                vision = new Vision();
+                vision.Start(ModuleName,ModuleSettingsFile);
                 ModuleStarted = true;
             }
-
-            return ModuleStarted;
         }
+        
 
-        public override void ShowModule(DockPanel dockingpanel) {
-            if (ModuleForm!=null) {
-                if (!ModuleForm.Visible) {
-                    ModuleForm.Show(dockingpanel);
-                    
-                }
-                ModuleForm.ModuleName = ModuleName;
-            }
-            
-            
-        }
+        
 
 
         public override void StopModule() {
             if (ModuleStarted) {
-                ModuleForm.Form1_FormClosing(this, new FormClosingEventArgs(CloseReason.UserClosing, false));                
+             //TODO STOP MODULE       
+                vision.GetVisionForm().Close();
                 ModuleStarted = false;
+                
             }
 
         }
@@ -283,14 +298,11 @@ namespace KPPAutomation {
     [XmlInclude(typeof(KPPVisionModule))]
     public class KPPModule {
 
+        public delegate void ModuleNameChanged(KPPModule module,String OldName);
+        
 
-
-        //private int m_modelID = -1;
-        //[XmlAttribute, DisplayName("Module ID"), ReadOnly(false)]
-        //public virtual int ModelID {
-        //    get { return m_modelID; }
-        //    set { m_modelID = value; }
-        //}
+        public virtual event ModuleNameChanged OnModuleNameChanged;
+        
 
         [XmlAttribute, DisplayName("Module Name")]
         public virtual String ModuleName {
@@ -320,14 +332,34 @@ namespace KPPAutomation {
             internal set { m_ModuleStarted = value; }
         }
 
+        private String m_ModuleSettingsFile;
+        [XmlIgnore, Browsable(false)]
+        public virtual String ModuleSettingsFile {
+            get { return m_ModuleSettingsFile; }
+            set { m_ModuleSettingsFile = value; }
+        }
+
+        [XmlAttribute, DisplayName("Module Settings location")]
+        [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]
+        public virtual string ModuleFilesLocation {
+            get;
+            set;
+        }
+        public virtual void UpdateModuleFilesLocation(String OldLocation, String NewLocation) {
+        }
+        public virtual void UpdateModuleNameFiles(String OldModuleName, String NewModuleName) {
+        }
+
+        public virtual DockContent GetModuleForm() {
+            return null;
+        }
+
+
         public virtual void StopModule() {
 
 
         }
 
-        public virtual Object GetModelForm() {
-            return null;
-        }
 
         public KPPModule() {
             
@@ -346,33 +378,17 @@ namespace KPPAutomation {
 
         }
 
+        public virtual void StartModule() {
 
-        public virtual String DockFile {
-            get;
-            set;
+
+           
         }
 
+        public virtual void StartModule(DockPanel MainDock) {
 
 
-        public virtual String ModuleSettings {
-            get;
-            set;
-        }
-
-
-        public virtual Boolean StartModule() {
-
-
-            return ModuleStarted;
-        }
-
-        public virtual void ShowModule(DockPanel dockingpanel) {
-        }
-
-        public virtual void StartModule(DockPanel dockingpanel) {
 
         }
-
        
 
         public override string ToString() {
