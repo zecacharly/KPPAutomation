@@ -13,6 +13,7 @@ using System.Drawing.Design;
 using VisionModule.Forms;
 using System.Windows.Forms.Design;
 using WeifenLuo.WinFormsUI.Docking;
+using System.Threading;
 
 namespace KPPAutomation {
 
@@ -212,9 +213,9 @@ namespace KPPAutomation {
         public override string ModuleFilesLocation {
             get { return m_ModuleFilesLocation; }
             set {
-                
 
-                UpdateModuleFilesLocation(m_ModuleName, value);
+
+                UpdateModuleFilesLocation(m_ModuleFilesLocation, value);
 
                 m_ModuleFilesLocation = value;
 
@@ -256,19 +257,51 @@ namespace KPPAutomation {
            
         }
 
+        private DockPanel MainDock;
 
-        public override void StartModule(DockPanel MainDock) {
-            StartModule();
-            vision.GetVisionForm().Show(MainDock);
-        }
 
-        public override void StartModule() {
-
+        public override void StartModule(DockPanel mainDock) {
+            if (mainDock.InvokeRequired) {
+                mainDock.BeginInvoke(new MethodInvoker(delegate {
+                    StartModule(mainDock);
+                    GetModuleForm().Show(mainDock);
+                }
+                ));
+                return;
+            }
+            MainDock = mainDock;
             if (!ModuleStarted) {
-
+                
                 vision = new Vision();
+                vision.OnModuleFormClosed += new Vision.ModuleFormClosedHandler(vision_OnModuleFormClosed);
+                
+                if (String.IsNullOrEmpty(ModuleFilesLocation)) {
+                    ModuleFilesLocation = AppDomain.CurrentDomain.BaseDirectory;
+                }
+
                 vision.Start(ModuleName,ModuleSettingsFile);
                 ModuleStarted = true;
+            }
+        }
+
+        void StartModule() {
+            Thread.Sleep(100);
+
+            Control ctr = new Control();
+
+           
+                StartModule(MainDock); 
+          
+
+        }
+
+
+        void vision_OnModuleFormClosed(bool restart) {
+            ModuleStarted = false;            
+            vision = null;
+            if (restart) {
+                Thread th = new Thread(new ThreadStart(StartModule));
+                th.Start(); 
             }
         }
         
@@ -378,11 +411,6 @@ namespace KPPAutomation {
 
         }
 
-        public virtual void StartModule() {
-
-
-           
-        }
 
         public virtual void StartModule(DockPanel MainDock) {
 

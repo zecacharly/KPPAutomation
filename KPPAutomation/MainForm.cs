@@ -145,9 +145,9 @@ namespace KPPAutomation {
                     try {
 
                         if (item.Enabled) {
-                            item.StartModule();
+                            item.StartModule(__MainDock);
                             item.OnModuleNameChanged += new KPPModule.ModuleNameChanged(item_OnModuleNameChanged);
-                        
+                           
                         }
                     }
                     catch (Exception exp) {
