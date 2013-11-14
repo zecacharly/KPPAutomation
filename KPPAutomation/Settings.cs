@@ -240,6 +240,7 @@ namespace KPPAutomation {
                 if (m_ModuleName != value) {
                     String oldvalue = m_ModuleName;
                     m_ModuleName = value;
+
                     if (OnModuleNameChanged!=null) {
                         OnModuleNameChanged(this,oldvalue);
                     }
@@ -274,7 +275,7 @@ namespace KPPAutomation {
                 
                 vision = new Vision();
                 vision.OnModuleFormClosed += new Vision.ModuleFormClosedHandler(vision_OnModuleFormClosed);
-                
+                ((VisionForm)vision.GetVisionForm()).OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
                 if (String.IsNullOrEmpty(ModuleFilesLocation)) {
                     ModuleFilesLocation = AppDomain.CurrentDomain.BaseDirectory;
                 }
@@ -282,6 +283,12 @@ namespace KPPAutomation {
                 vision.Start(ModuleName,ModuleSettingsFile);
                 ModuleStarted = true;
             }
+        }
+
+        public VisionProject ProjectSelected;
+
+        void KPPVisionModule_OnSelectedProjectChanged(VisionProject projectSelected) {
+            ProjectSelected = projectSelected;
         }
 
         void StartModule() {

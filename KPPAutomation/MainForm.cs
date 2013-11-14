@@ -190,7 +190,9 @@ namespace KPPAutomation {
                         if (item.Enabled) {
                             if (!item.GetModuleForm().Visible) {
                                 item.GetModuleForm().Show(__MainDock);
+
                             }
+                            
                         }
                     } catch (Exception exp) {
 
@@ -203,6 +205,10 @@ namespace KPPAutomation {
                 //LoadModulesThread = new Thread(new ThreadStart(DoLoadModules));
                 //LoadModulesThread.IsBackground = true;
                 //LoadModulesThread.Start();              
+
+            
+                __MainDock.ActiveContentChanged+=new EventHandler(__MainDock_ActiveContentChanged);
+                
             }
             catch (Exception exp) {
 
@@ -210,6 +216,7 @@ namespace KPPAutomation {
             }
            
         }
+
 
         void item_OnModuleNameChanged(KPPModule module, string OldName) {
             if (MessageBox.Show(this.GetResourceText("Change_Module_Name"), this.GetResourceText("Confirm_option"), MessageBoxButtons.YesNo) == DialogResult.Yes) {
@@ -222,11 +229,22 @@ namespace KPPAutomation {
             }
         }
 
-       
 
 
+        KPPModule _activemodule = null;
         void __MainDock_ActiveContentChanged(object sender, EventArgs e) {
-           
+            //try {
+            //    foreach (KPPModule item in ApplicationConfig.Modules) {
+            //        DockPanel dock = (DockPanel)sender;
+            //        if (item.GetModuleForm().Equals(dock.ActiveContent)) {
+            //            _activemodule=item;
+            //            break;
+            //        }
+            //    }
+            //} catch (Exception exp) {
+
+            //    log.Error(exp);
+            //}
         }
 
         LogForm _LogForm = new LogForm();
@@ -428,6 +446,51 @@ namespace KPPAutomation {
 
 
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
+            if ((keyData == Keys.F9 || keyData == Keys.F8) || (keyData == (Keys.Control | Keys.L)) || (keyData == (Keys.Control | Keys.S))) {
+                try {
+                    foreach (KPPModule item in ApplicationConfig.Modules) {
+
+                        if (item.GetModuleForm().Equals(__MainDock.ActiveContent)) {
+                            if (item is KPPVisionModule) {
+                                VisionProject project = ((KPPVisionModule)item).ProjectSelected;
+                                if (project != null) {
+                                    if (keyData == Keys.F9) {
+                                        project.SelectedRequest.ProcessRequest(null, true, null);
+                                    } else if (keyData == Keys.F8) {
+                                        project.SelectedRequest.ProcessRequest(null, false, null);
+                                    } else if (keyData == Keys.F7) {
+                                        ((VisionForm)item.GetModuleForm()).captureAndProcessToolStripMenuItem_Click(null, null);                                        
+                                    } else if (keyData == Keys.F6) {
+                                        ((VisionForm)item.GetModuleForm()).processToolStripMenuItem_Click(null, null);                                        
+                                    }else if ((keyData == (Keys.Control | Keys.L))) {
+                                        ((VisionForm)item.GetModuleForm()).OpenToolStripMenuItem_Click(null, null);
+                                    } else if ((keyData == (Keys.Control | Keys.S))) {
+                                        ((VisionForm)item.GetModuleForm()).__toolSaveproj_Click(null, null);
+                                    }
+
+
+                                }
+                            }
+                            break;
+                        }
+                    }
+                } catch (Exception exp) {
+
+                    log.Error(exp);
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e) {
+            
+        }
+
+        private void MainForm_KeyDown(object sender, KeyEventArgs e) {
+           
         }
 
     }
