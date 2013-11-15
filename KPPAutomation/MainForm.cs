@@ -188,8 +188,8 @@ namespace KPPAutomation {
                     try {
 
                         if (item.Enabled) {
-                            if (!item.GetModuleForm().Visible) {
-                                item.GetModuleForm().Show(__MainDock);
+                            if (!item.ModuleForm.Visible) {
+                                item.ModuleForm.Show(__MainDock);
 
                             }
                             
@@ -330,12 +330,8 @@ namespace KPPAutomation {
 
 
             foreach (KPPModule item in ApplicationConfig.Modules) {
-                object moduleform = item.GetModuleForm();
-                if (moduleform != null) {
-                    IDockContent moduledockform = (IDockContent)moduleform;
-                    if (persistString == item.ModuleName) {
-                        return moduledockform;
-                    }
+                if (persistString == item.ModuleName) {
+                    return item.ModuleForm;
                 }
 
             }
@@ -398,7 +394,7 @@ namespace KPPAutomation {
         private void UnLoadVisionModules() {
             foreach (KPPModule item in ApplicationConfig.Modules) {
                 if (item.ModuleStarted) {
-                    item.GetModuleForm().Close();
+                    item.ModuleForm.Close();
                     //TODDO dispose vision
                 }
             }
@@ -453,7 +449,7 @@ namespace KPPAutomation {
                 try {
                     foreach (KPPModule item in ApplicationConfig.Modules) {
 
-                        if (item.GetModuleForm().Equals(__MainDock.ActiveContent)) {
+                        if (item.ModuleForm.Equals(__MainDock.ActiveContent)) {
                             if (item is KPPVisionModule) {
                                 VisionProject project = ((KPPVisionModule)item).ProjectSelected;
                                 if (project != null) {
@@ -462,13 +458,13 @@ namespace KPPAutomation {
                                     } else if (keyData == Keys.F8) {
                                         project.SelectedRequest.ProcessRequest(null, false, null);
                                     } else if (keyData == Keys.F7) {
-                                        ((VisionForm)item.GetModuleForm()).captureAndProcessToolStripMenuItem_Click(null, null);                                        
+                                        ((VisionForm)item.ModuleForm).captureAndProcessToolStripMenuItem_Click(null, null);                                        
                                     } else if (keyData == Keys.F6) {
-                                        ((VisionForm)item.GetModuleForm()).processToolStripMenuItem_Click(null, null);                                        
+                                        ((VisionForm)item.ModuleForm).processToolStripMenuItem_Click(null, null);                                        
                                     }else if ((keyData == (Keys.Control | Keys.L))) {
-                                        ((VisionForm)item.GetModuleForm()).OpenToolStripMenuItem_Click(null, null);
+                                        ((VisionForm)item.ModuleForm).OpenToolStripMenuItem_Click(null, null);
                                     } else if ((keyData == (Keys.Control | Keys.S))) {
-                                        ((VisionForm)item.GetModuleForm()).__toolSaveproj_Click(null, null);
+                                        ((VisionForm)item.ModuleForm).__toolSaveproj_Click(null, null);
                                     }
 
 
