@@ -145,10 +145,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\EpsonModule\EpsonModule\EpsonModule.csproj">
-      <Project>{A150FCBA-35C2-41A0-B534-E83D89DB4212}</Project>
-      <Name>EpsonModule</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\KPPAutomationCore\KPPAutomationCore.csproj">
       <Project>{96625E2E-382E-412F-A3BB-95A773F3B8D8}</Project>
       <Name>KPPAutomationCore</Name>

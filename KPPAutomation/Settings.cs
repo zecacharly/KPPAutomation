@@ -14,7 +14,7 @@ using VisionModule.Forms;
 using System.Windows.Forms.Design;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Threading;
-using EpsonModule;
+
 
 namespace KPPAutomation {
 
@@ -138,189 +138,189 @@ namespace KPPAutomation {
 
 
 
-    public class KPPEpsonModule : KPPModule {
+    //public class KPPEpsonModule : KPPModule {
 
-        public override event ModuleNameChanged OnModuleNameChanged;
+    //    public override event ModuleNameChanged OnModuleNameChanged;
 
 
-        private static KPPLogger log = new KPPLogger(typeof(KPPEpsonModule));
+    //    private static KPPLogger log = new KPPLogger(typeof(KPPEpsonModule));
 
 
 
-        private String m_ModuleSettingsFile;
-        [XmlIgnore, Browsable(false)]
-        public override String ModuleSettingsFile {
-            get { return m_ModuleSettingsFile; }
-            set { m_ModuleSettingsFile = value; }
-        }
+    //    private String m_ModuleSettingsFile;
+    //    [XmlIgnore, Browsable(false)]
+    //    public override String ModuleSettingsFile {
+    //        get { return m_ModuleSettingsFile; }
+    //        set { m_ModuleSettingsFile = value; }
+    //    }
 
-        private string m_ModuleFilesLocation;
-        [XmlAttribute, DisplayName("Module Settings location")]
-        [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]
-        public override string ModuleFilesLocation {
-            get { return m_ModuleFilesLocation; }
-            set {
+    //    private string m_ModuleFilesLocation;
+    //    [XmlAttribute, DisplayName("Module Settings location")]
+    //    [EditorAttribute(typeof(AppFileFolderSelector), typeof(UITypeEditor))]
+    //    public override string ModuleFilesLocation {
+    //        get { return m_ModuleFilesLocation; }
+    //        set {
 
 
-                UpdateModuleFilesLocation(m_ModuleFilesLocation, value);
+    //            UpdateModuleFilesLocation(m_ModuleFilesLocation, value);
 
-                m_ModuleFilesLocation = value;
+    //            m_ModuleFilesLocation = value;
 
 
 
 
-            }
-        }
+    //        }
+    //    }
 
 
 
 
-        private String m_ModuleName = "New Epson module";
-        [XmlAttribute, DisplayName("Module Name")]
-        public override String ModuleName {
-            get { return m_ModuleName; }
-            set {
-                if (m_ModuleName != value) {
-                    String oldvalue = m_ModuleName;
-                    m_ModuleName = value;
+    //    private String m_ModuleName = "New Epson module";
+    //    [XmlAttribute, DisplayName("Module Name")]
+    //    public override String ModuleName {
+    //        get { return m_ModuleName; }
+    //        set {
+    //            if (m_ModuleName != value) {
+    //                String oldvalue = m_ModuleName;
+    //                m_ModuleName = value;
 
-                    if (OnModuleNameChanged != null) {
-                        OnModuleNameChanged(this, oldvalue);
-                    }
+    //                if (OnModuleNameChanged != null) {
+    //                    OnModuleNameChanged(this, oldvalue);
+    //                }
 
-                }
-            }
-        }
+    //            }
+    //        }
+    //    }
 
 
-        [XmlIgnore]
-        public override String ModuleType {
-            get {
-                return this.GetType().ToString();
-            }
+    //    [XmlIgnore]
+    //    public override String ModuleType {
+    //        get {
+    //            return this.GetType().ToString();
+    //        }
 
-        }
+    //    }
 
 
-        private DockPanel MainDock;
+    //    private DockPanel MainDock;
 
-        [XmlIgnore, Browsable(false)]
-        public EpsonMainForm epsonForm;
+    //    [XmlIgnore, Browsable(false)]
+    //    public EpsonMainForm epsonForm;
 
 
-        [XmlIgnore, Browsable(false)]
-        public override DockContent ModuleForm {
-            get { return epsonForm; }
-        }
+    //    [XmlIgnore, Browsable(false)]
+    //    public override DockContent ModuleForm {
+    //        get { return epsonForm; }
+    //    }
 
 
-        public override void UpdateModuleNameFiles(String OldModuleName, String NewModuleName) {
+    //    public override void UpdateModuleNameFiles(String OldModuleName, String NewModuleName) {
 
-            if (!String.IsNullOrEmpty(NewModuleName)) {
-                if (!String.IsNullOrEmpty(OldModuleName)) {
+    //        if (!String.IsNullOrEmpty(NewModuleName)) {
+    //            if (!String.IsNullOrEmpty(OldModuleName)) {
 
-                    if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"))) {
-                        File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"), Path.Combine(ModuleFilesLocation, NewModuleName + ".dock"), true);
-                        File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"));
-                    }
+    //                if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"))) {
+    //                    File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"), Path.Combine(ModuleFilesLocation, NewModuleName + ".dock"), true);
+    //                    File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".dock"));
+    //                }
 
-                    if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"))) {
-                        File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"), Path.Combine(ModuleFilesLocation, NewModuleName + ".VisionModule"), true);
-                        File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"));
-                    } else {
-                        VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewModuleName, ModuleName + ".EpsonModule"));
-                    }
+    //                if (File.Exists(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"))) {
+    //                    File.Copy(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"), Path.Combine(ModuleFilesLocation, NewModuleName + ".VisionModule"), true);
+    //                    File.Delete(Path.Combine(ModuleFilesLocation, OldModuleName + ".EpsonModule"));
+    //                } else {
+    //                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewModuleName, ModuleName + ".EpsonModule"));
+    //                }
 
-                }
+    //            }
 
-                if (!File.Exists(Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule"))) {
+    //            if (!File.Exists(Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule"))) {
 
-                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule"));
-                }
-                ModuleSettingsFile = Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule");
-            }
-        }
+    //                VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule"));
+    //            }
+    //            ModuleSettingsFile = Path.Combine(ModuleFilesLocation, ModuleName + ".EpsonModule");
+    //        }
+    //    }
 
-        public override void UpdateModuleFilesLocation(String OldLocation, String NewLocation) {
-            if (!String.IsNullOrEmpty(NewLocation)) {
-                if (!Directory.Exists(NewLocation)) {
-                    Directory.CreateDirectory(Path.GetDirectoryName(NewLocation));
-                }
-                if (!String.IsNullOrEmpty(OldLocation)) {
+    //    public override void UpdateModuleFilesLocation(String OldLocation, String NewLocation) {
+    //        if (!String.IsNullOrEmpty(NewLocation)) {
+    //            if (!Directory.Exists(NewLocation)) {
+    //                Directory.CreateDirectory(Path.GetDirectoryName(NewLocation));
+    //            }
+    //            if (!String.IsNullOrEmpty(OldLocation)) {
 
-                    if (File.Exists(Path.Combine(OldLocation, ModuleName + ".dock"))) {
-                        File.Copy(Path.Combine(OldLocation, ModuleName + ".dock"), Path.Combine(NewLocation, ModuleName + ".dock"), true);
-                        File.Delete(Path.Combine(OldLocation, ModuleName + ".dock"));
-                    }
+    //                if (File.Exists(Path.Combine(OldLocation, ModuleName + ".dock"))) {
+    //                    File.Copy(Path.Combine(OldLocation, ModuleName + ".dock"), Path.Combine(NewLocation, ModuleName + ".dock"), true);
+    //                    File.Delete(Path.Combine(OldLocation, ModuleName + ".dock"));
+    //                }
 
-                    if (File.Exists(Path.Combine(OldLocation, ModuleName + ".VisionModule"))) {
-                        File.Copy(Path.Combine(OldLocation, ModuleName + ".VisionModule"), Path.Combine(NewLocation, ModuleName + ".VisionModule"), true);
-                        File.Delete(Path.Combine(OldLocation, ModuleName + ".VisionModule"));
-                    } else {
-                        VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
-                    }
+    //                if (File.Exists(Path.Combine(OldLocation, ModuleName + ".VisionModule"))) {
+    //                    File.Copy(Path.Combine(OldLocation, ModuleName + ".VisionModule"), Path.Combine(NewLocation, ModuleName + ".VisionModule"), true);
+    //                    File.Delete(Path.Combine(OldLocation, ModuleName + ".VisionModule"));
+    //                } else {
+    //                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
+    //                }
 
-                }
+    //            }
 
-                if (!File.Exists(Path.Combine(NewLocation, ModuleName + ".VisionModule"))) {
+    //            if (!File.Exists(Path.Combine(NewLocation, ModuleName + ".VisionModule"))) {
 
-                    VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
-                }
-                ModuleSettingsFile = Path.Combine(NewLocation, ModuleName + ".VisionModule");
-            }
-        }
+    //                VisionSettings.WriteConfiguration(new VisionSettings(), Path.Combine(NewLocation, ModuleName + ".VisionModule"));
+    //            }
+    //            ModuleSettingsFile = Path.Combine(NewLocation, ModuleName + ".VisionModule");
+    //        }
+    //    }
 
-        public override void StartModule(DockPanel mainDock) {
-            if (mainDock.InvokeRequired) {
-                mainDock.BeginInvoke(new MethodInvoker(delegate {
-                    StartModule(mainDock);
+    //    public override void StartModule(DockPanel mainDock) {
+    //        if (mainDock.InvokeRequired) {
+    //            mainDock.BeginInvoke(new MethodInvoker(delegate {
+    //                StartModule(mainDock);
 
-                }
-                ));
-                return;
-            }
-            MainDock = mainDock;
-            if (!ModuleStarted) {
-                epsonForm = new EpsonMainForm();
+    //            }
+    //            ));
+    //            return;
+    //        }
+    //        MainDock = mainDock;
+    //        if (!ModuleStarted) {
+    //          //  epsonForm = new EpsonMainForm();
 
-                epsonForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
-                epsonForm.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
+    //            epsonForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
+    //        //    epsonForm.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
 
-                if (String.IsNullOrEmpty(ModuleFilesLocation)) {
-                    ModuleFilesLocation = AppDomain.CurrentDomain.BaseDirectory;
-                }
+    //            if (String.IsNullOrEmpty(ModuleFilesLocation)) {
+    //                ModuleFilesLocation = AppDomain.CurrentDomain.BaseDirectory;
+    //            }
 
-                visionForm.InitModule(ModuleName, ModuleSettingsFile);
-                //visionForm.Show
-                ModuleStarted = true;
-            }
-        }
+    //          //  visionForm.InitModule(ModuleName, ModuleSettingsFile);
+    //            //visionForm.Show
+    //            ModuleStarted = true;
+    //        }
+    //    }
 
-        void KPPVisionModule_FormClosed(object sender, FormClosedEventArgs e) {
-            ModuleStarted = false;
+    //    void KPPVisionModule_FormClosed(object sender, FormClosedEventArgs e) {
+    //        ModuleStarted = false;
 
-            if (visionForm.Restart) {
-                Thread th = new Thread(new ThreadStart(StartModule));
-                th.Start();
-            }
-        }
-        [XmlIgnore, Browsable(false)]
-        public VisionProject ProjectSelected;
+    //        //if (visionForm.Restart) {
+    //        //    Thread th = new Thread(new ThreadStart(StartModule));
+    //        //    th.Start();
+    //        //}
+    //    }
+    //    [XmlIgnore, Browsable(false)]
+    //    public VisionProject ProjectSelected;
 
-        void KPPVisionModule_OnSelectedProjectChanged(VisionProject projectSelected) {
-            ProjectSelected = projectSelected;
-        }
+    //    void KPPVisionModule_OnSelectedProjectChanged(VisionProject projectSelected) {
+    //        ProjectSelected = projectSelected;
+    //    }
 
-        void StartModule() {
-            Thread.Sleep(100);
+    //    void StartModule() {
+    //        Thread.Sleep(100);
 
-            Control ctr = new Control();
+    //        Control ctr = new Control();
 
 
-            StartModule(MainDock);
+    //        StartModule(MainDock);
 
 
-        }
+    //    }
 
 
 
@@ -328,23 +328,23 @@ namespace KPPAutomation {
 
 
 
-        public override void StopModule() {
-            if (ModuleStarted) {
-                visionForm.Restart = false;
-                visionForm.Close();
-                ModuleStarted = false;
+    //    public override void StopModule() {
+    //        if (ModuleStarted) {
+    //            visionForm.Restart = false;
+    //            visionForm.Close();
+    //            ModuleStarted = false;
 
-            }
+    //        }
 
-        }
+    //    }
 
 
-        public override string ToString() {
-            return ModuleName;
-        }
+    //    public override string ToString() {
+    //        return ModuleName;
+    //    }
 
 
-    }
+    //}
 
 
     public class KPPVisionModule : KPPModule {
@@ -493,14 +493,16 @@ namespace KPPAutomation {
                 visionForm = new VisionForm();
 
                 visionForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
-                visionForm.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
+                
 
                 if (String.IsNullOrEmpty(ModuleFilesLocation)) {
                     ModuleFilesLocation = AppDomain.CurrentDomain.BaseDirectory;
                 }
 
                 visionForm.InitModule(ModuleName, ModuleSettingsFile);
-                //visionForm.Show
+                
+                visionForm.VisionConfig.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
+
                 ModuleStarted = true;
             }
         }
@@ -516,8 +518,8 @@ namespace KPPAutomation {
         [XmlIgnore,Browsable(false)]
         public VisionProject ProjectSelected;
 
-        void KPPVisionModule_OnSelectedProjectChanged(VisionProject projectSelected) {
-            ProjectSelected = projectSelected;
+        void KPPVisionModule_OnSelectedProjectChanged(ModuleProject projectSelected) {
+            ProjectSelected = (VisionProject)projectSelected;
         }
 
         void StartModule() {
