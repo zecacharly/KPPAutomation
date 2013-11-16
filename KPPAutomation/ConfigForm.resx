@@ -121,9 +121,6 @@
   <data name="tableLayoutPanel1.Size" type="System.Drawing.Size, System.Drawing">
     <value>342, 416</value>
   </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Configurations</value>
-  </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
     <value>342, 416</value>
   </data>
@@ -137,18 +134,11 @@
   <data name="&gt;&gt;panel1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 0</value>
-  </data>
   <data name="&gt;&gt;__btsaveConf.Name" xml:space="preserve">
     <value>__btsaveConf</value>
   </data>
   <data name="__btsaveConf.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 357</value>
-  </data>
-  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
-    <value>2</value>
   </data>
   <data name="__PropertySettings.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -165,14 +155,18 @@
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>ConfigForm</value>
   </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tableLayoutPanel1.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
   <data name="__btexitconf.TabIndex" type="System.Int32, mscorlib">
     <value>3</value>
   </data>
-  <data name="__btsaveConf.Size" type="System.Drawing.Size, System.Drawing">
-    <value>165, 56</value>
+  <data name="&gt;&gt;__PropertySettings.Parent" xml:space="preserve">
+    <value>panel1</value>
+  </data>
+  <data name="&gt;&gt;__PropertySettings.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="tableLayoutPanel1.ColumnCount" type="System.Int32, mscorlib">
     <value>2</value>
@@ -189,6 +183,9 @@
   <data name="&gt;&gt;__btsaveConf.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="&gt;&gt;__btexitconf.Name" xml:space="preserve">
+    <value>__btexitconf</value>
+  </data>
   <data name="&gt;&gt;panel1.Name" xml:space="preserve">
     <value>panel1</value>
   </data>
@@ -204,8 +201,8 @@
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;__PropertySettings.Parent" xml:space="preserve">
-    <value>panel1</value>
+  <data name="tableLayoutPanel1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="&gt;&gt;__btexitconf.ZOrder" xml:space="preserve">
     <value>0</value>
@@ -231,8 +228,8 @@
   <data name="&gt;&gt;__btsaveConf.Type" xml:space="preserve">
     <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="__btsaveConf.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
+  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>Fill</value>
   </data>
   <data name="__btsaveConf.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -246,8 +243,8 @@
   <data name="panel1.Location" type="System.Drawing.Point, System.Drawing">
     <value>3, 3</value>
   </data>
-  <data name="tableLayoutPanel1.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
-    <value>Fill</value>
+  <data name="__btsaveConf.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="&gt;&gt;panel1.Type" xml:space="preserve">
     <value>System.Windows.Forms.Panel, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -258,14 +255,17 @@
   <data name="__PropertySettings.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;__PropertySettings.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="__btexitconf.Location" type="System.Drawing.Point, System.Drawing">
     <value>174, 357</value>
   </data>
-  <data name="&gt;&gt;__btexitconf.Name" xml:space="preserve">
-    <value>__btexitconf</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Configurations</value>
+  </data>
+  <data name="tableLayoutPanel1.RowCount" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="__btsaveConf.Size" type="System.Drawing.Size, System.Drawing">
+    <value>165, 56</value>
   </data>
   <data name="&gt;&gt;tableLayoutPanel1.Name" xml:space="preserve">
     <value>tableLayoutPanel1</value>

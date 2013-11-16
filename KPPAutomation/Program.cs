@@ -6,6 +6,7 @@ using KPP.Core.Debug;
 using System.Threading;
 using System.IO;
 using System.Resources;
+using System.Reflection;
 
 namespace KPPAutomation {
     static class Program {
@@ -37,21 +38,7 @@ namespace KPPAutomation {
             }
         }
 
-        public static string GetResourceText(this Object from, String ResVar) {
-            return GetResourceText(from, "KPPAutomation.Resources.Language.Res", ResVar);
-        }
-
-        public static string GetResourceText(this Object from, String ResLocation, String ResVar) {
-            try {
-                //ComponentResourceManager resources = new ComponentResourceManager(Program.);
-                ResourceManager res_man = new ResourceManager(ResLocation, from.GetType().Assembly);
-                return res_man.GetString(ResVar, Thread.CurrentThread.CurrentUICulture);
-            }
-            catch (Exception exp) {
-
-                return "Error getting resource";
-            }
-        }
+       
 
         /// <summary>
         /// The main entry point for the application.
