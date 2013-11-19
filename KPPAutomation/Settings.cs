@@ -116,12 +116,20 @@ namespace KPPAutomation {
             String currentloc = ((KPPModule)context.Instance).ModuleFilesLocation;
             if (String.IsNullOrEmpty(currentloc)) {
                 currentloc = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory);
+            } else {
+                var relpath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,currentloc);                                
+
+                String thefilepath = Path.GetFullPath(relpath);// +Path.GetFileName(newpath);
+
+
+
+                currentloc = thefilepath;
             }
             openFolderDialog.SelectedPath = currentloc;
             if (openFolderDialog.ShowDialog() == DialogResult.OK) {
 
                 openFolderDialog.Dispose();
-                //base.InitializeDialog(openFolderDialog);
+               
                 Uri fullPath = new Uri(openFolderDialog.SelectedPath, UriKind.Absolute);
                 Uri relRoot = new Uri(AppDomain.CurrentDomain.BaseDirectory, UriKind.Absolute);
 
