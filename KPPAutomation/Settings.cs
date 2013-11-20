@@ -489,6 +489,14 @@ namespace KPPAutomation {
         public override void StartModule(DockPanel mainDock) {
             if (mainDock.InvokeRequired) {
                 mainDock.BeginInvoke(new MethodInvoker(delegate {
+                    if (visionForm != null) {
+                        visionForm.Dispose();
+                        while (visionForm.Disposing) {
+                            Thread.Sleep(1);
+                        }
+                        visionForm = null;
+                    }
+
                     StartModule(mainDock);
                     
                 }
@@ -497,6 +505,8 @@ namespace KPPAutomation {
             }
             MainDock = mainDock;
             if (!ModuleStarted) {
+
+                
                 visionForm = new VisionForm();
 
                 visionForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
