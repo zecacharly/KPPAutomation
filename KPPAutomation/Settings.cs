@@ -296,7 +296,9 @@ namespace KPPAutomation {
                 epsonForm.InitModule(ModuleName, ModuleSettingsFile);
 
 
-                epsonForm.EpsonSettings.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
+                epsonForm.EpsonSettings.OnSelectedProjectChanged += new SelectedProjectChanged(EpsonModule_OnSelectedProjectChanged);
+                EpsonModule_OnSelectedProjectChanged(epsonForm.EpsonSettings.SelectedProject);
+
                 ModuleStarted = true;
             }
         }
@@ -312,7 +314,7 @@ namespace KPPAutomation {
         [XmlIgnore, Browsable(false)]
         public EpsonProject ProjectSelected;
 
-        void KPPVisionModule_OnSelectedProjectChanged(ModuleProject projectSelected) {
+        void EpsonModule_OnSelectedProjectChanged(ModuleProject projectSelected) {
             ProjectSelected = (EpsonProject)projectSelected;
         }
 
@@ -507,7 +509,7 @@ namespace KPPAutomation {
                 visionForm.InitModule(ModuleName, ModuleSettingsFile);
                 
                 visionForm.VisionConfig.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
-
+                KPPVisionModule_OnSelectedProjectChanged(visionForm.VisionConfig.SelectedProject);
                 ModuleStarted = true;
             }
         }
