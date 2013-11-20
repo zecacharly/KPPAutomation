@@ -273,10 +273,10 @@ namespace KPPAutomation {
             }
         }
 
-        public override void StartModule(DockPanel mainDock) {
+        public override void StartModule(DockPanel mainDock, Boolean show = false) {
             if (mainDock.InvokeRequired) {
                 mainDock.BeginInvoke(new MethodInvoker(delegate {
-                    StartModule(mainDock);
+                    StartModule(mainDock,show);
 
                 }
                 ));
@@ -298,7 +298,9 @@ namespace KPPAutomation {
 
                 epsonForm.EpsonSettings.OnSelectedProjectChanged += new SelectedProjectChanged(EpsonModule_OnSelectedProjectChanged);
                 EpsonModule_OnSelectedProjectChanged(epsonForm.EpsonSettings.SelectedProject);
-
+                if (show) {
+                    epsonForm.Show(MainDock);
+                }
                 ModuleStarted = true;
             }
         }
@@ -486,10 +488,11 @@ namespace KPPAutomation {
             }
         }
 
-        public override void StartModule(DockPanel mainDock) {
+        public override void StartModule(DockPanel mainDock,Boolean show=false) {
             if (mainDock.InvokeRequired) {
                 mainDock.BeginInvoke(new MethodInvoker(delegate {
-                    StartModule(mainDock);
+                    
+                    StartModule(mainDock,show);
                     
                 }
                 ));
@@ -510,6 +513,10 @@ namespace KPPAutomation {
                 
                 visionForm.VisionConfig.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
                 KPPVisionModule_OnSelectedProjectChanged(visionForm.VisionConfig.SelectedProject);
+
+                if (show) {
+                    visionForm.Show(MainDock);
+                }
                 ModuleStarted = true;
             }
         }
@@ -518,10 +525,16 @@ namespace KPPAutomation {
             ModuleStarted = false;
 
             if (visionForm.Restart) {
+                visionForm = null;
+
                 Thread th = new Thread(new ThreadStart(StartModule));
                 th.Start();
             }
+            else {
+                visionForm = null;
+            }
         }
+
         [XmlIgnore,Browsable(false)]
         public VisionProject ProjectSelected;
 
@@ -532,11 +545,8 @@ namespace KPPAutomation {
         void StartModule() {
             Thread.Sleep(100);
 
-            Control ctr = new Control();
+            StartModule(MainDock, true);
 
-           
-                StartModule(MainDock); 
-          
 
         }
 
@@ -654,7 +664,7 @@ namespace KPPAutomation {
         }
 
 
-        public virtual void StartModule(DockPanel MainDock) {
+        public virtual void StartModule(DockPanel mainDock, Boolean show = false) {
 
 
 
