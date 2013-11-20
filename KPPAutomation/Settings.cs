@@ -273,7 +273,7 @@ namespace KPPAutomation {
             }
         }
 
-        public override void StartModule(DockPanel mainDock) {
+        public override void StartModule(DockPanel mainDock, Boolean showModule = false) {
             if (mainDock.InvokeRequired) {
                 mainDock.BeginInvoke(new MethodInvoker(delegate {
                     StartModule(mainDock);
@@ -286,7 +286,7 @@ namespace KPPAutomation {
             if (!ModuleStarted) {
                 epsonForm = new EpsonMainForm();
 
-                epsonForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
+                epsonForm.FormClosed += new FormClosedEventHandler(EpsonModule_FormClosed);
                 
 
                 if (String.IsNullOrEmpty(ModuleFilesLocation)) {
@@ -299,11 +299,14 @@ namespace KPPAutomation {
                 epsonForm.EpsonSettings.OnSelectedProjectChanged += new SelectedProjectChanged(EpsonModule_OnSelectedProjectChanged);
                 EpsonModule_OnSelectedProjectChanged(epsonForm.EpsonSettings.SelectedProject);
 
+                if (showModule) {
+                    epsonForm.Show(mainDock);
+                }
                 ModuleStarted = true;
             }
         }
 
-        void KPPVisionModule_FormClosed(object sender, FormClosedEventArgs e) {
+        void EpsonModule_FormClosed(object sender, FormClosedEventArgs e) {
             ModuleStarted = false;
 
             if (epsonForm.Restart) {
@@ -321,10 +324,7 @@ namespace KPPAutomation {
         void StartModule() {
             Thread.Sleep(100);
 
-            Control ctr = new Control();
-
-
-            StartModule(MainDock);
+            StartModule(MainDock,true);
 
 
         }
@@ -486,17 +486,23 @@ namespace KPPAutomation {
             }
         }
 
-        public override void StartModule(DockPanel mainDock) {
+        public override void StartModule(DockPanel mainDock, Boolean showModule = false) {
             if (mainDock.InvokeRequired) {
                 mainDock.BeginInvoke(new MethodInvoker(delegate {
-                    StartModule(mainDock);
+                    StartModule(mainDock, showModule);
                     
                 }
                 ));
                 return;
             }
-            MainDock = mainDock;
+            
+            MainDock = mainDock;          
             if (!ModuleStarted) {
+                if (visionForm!=null) {
+                    visionForm.Dispose();
+                    visionForm = null;
+
+                }
                 visionForm = new VisionForm();
 
                 visionForm.FormClosed += new FormClosedEventHandler(KPPVisionModule_FormClosed);
@@ -511,6 +517,9 @@ namespace KPPAutomation {
                 visionForm.VisionConfig.OnSelectedProjectChanged += new SelectedProjectChanged(KPPVisionModule_OnSelectedProjectChanged);
                 KPPVisionModule_OnSelectedProjectChanged(visionForm.VisionConfig.SelectedProject);
                 ModuleStarted = true;
+                if (showModule) {
+                    visionForm.Show(mainDock); 
+                }
             }
         }
 
@@ -531,11 +540,7 @@ namespace KPPAutomation {
 
         void StartModule() {
             Thread.Sleep(100);
-
-            Control ctr = new Control();
-
-           
-                StartModule(MainDock); 
+            StartModule(MainDock,true); 
           
 
         }
@@ -654,7 +659,7 @@ namespace KPPAutomation {
         }
 
 
-        public virtual void StartModule(DockPanel MainDock) {
+        public virtual void StartModule(DockPanel MainDock,Boolean showModule=false) {
 
 
 
