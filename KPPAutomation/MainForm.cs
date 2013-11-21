@@ -258,7 +258,8 @@ namespace KPPAutomation {
                     if (e.MessageType == MessageType.Error || e.MessageType == MessageType.Fatal) {
 
 
-                        _LogForm.__textBoxExceptions.Text += "["+e.IdName+"]"+e.Message;
+                        //_LogForm.__textBoxExceptions.Text += "["+e.IdName+"]"+e.Message;
+                        _LogForm.__textBoxExceptions.Text += e.Message;
 
 
                         if (_LogForm.__textBoxExceptions.Text.Length > 0) {
@@ -269,7 +270,8 @@ namespace KPPAutomation {
 
                     }
                     else {
-                        _LogForm.__textBoxWarnings.Text += "[" + e.IdName + "]"+e.Message;
+                        //_LogForm.__textBoxWarnings.Text += "[" + e.IdName + "]"+e.Message;
+                        _LogForm.__textBoxWarnings.Text += e.Message;
 
                         if (_LogForm.__textBoxWarnings.Text.Length > 0) {
                             _LogForm.__textBoxWarnings.AppendText(Environment.NewLine);
