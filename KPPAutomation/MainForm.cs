@@ -447,7 +447,7 @@ namespace KPPAutomation {
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData) {
-            if ((keyData == Keys.F9 || keyData == Keys.F8) || (keyData == (Keys.Control | Keys.L)) || (keyData == (Keys.Control | Keys.S))) {
+            if ((keyData == Keys.F9 || keyData == Keys.F8 || keyData == Keys.F7 || keyData == Keys.F6) || (keyData == (Keys.Control | Keys.L)) || (keyData == (Keys.Control | Keys.S))) {
                 try {
                     foreach (KPPModule item in ApplicationConfig.Modules) {
 
