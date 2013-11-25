@@ -535,11 +535,19 @@ namespace KPPAutomation {
             }
         }
 
-        [XmlIgnore,Browsable(false)]
-        public VisionProject ProjectSelected;
+
+
+        private ModuleProject _ProjectSelected;
+        [XmlIgnore, Browsable(false)]
+        public override ModuleProject ProjectSelected {
+            get { return _ProjectSelected; }
+            set { _ProjectSelected = value; }
+        }
+        
+        
 
         void KPPVisionModule_OnSelectedProjectChanged(ModuleProject projectSelected) {
-            ProjectSelected = (VisionProject)projectSelected;
+            ProjectSelected = projectSelected;
         }
 
         void StartModule() {
@@ -583,7 +591,15 @@ namespace KPPAutomation {
         
 
         public virtual event ModuleNameChanged OnModuleNameChanged;
+
+        private ModuleProject _ProjectSelected;
+        [XmlIgnore, Browsable(false)]
+        public virtual ModuleProject ProjectSelected {
+            get { return _ProjectSelected; }
+            set { _ProjectSelected = value; }
+        }
         
+     
 
         [XmlAttribute, DisplayName("Module Name")]
         public virtual String ModuleName {

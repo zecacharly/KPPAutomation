@@ -13,6 +13,7 @@ using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using VisionModule;
 using KPPAutomationCore;
+using IOModule;
 
 namespace KPPAutomation {
     public partial class MainForm : Form {
@@ -208,6 +209,11 @@ namespace KPPAutomation {
 
             
                 __MainDock.ActiveContentChanged+=new EventHandler(__MainDock_ActiveContentChanged);
+
+                PhidgetsIO.InitializePhidgets();
+
+                
+
                 
             }
             catch (Exception exp) {
@@ -215,6 +221,10 @@ namespace KPPAutomation {
                 log.Error(exp);
             }
            
+        }
+
+        void PhidgetsIO_OnBordAvaible(int boardSerial) {
+            
         }
 
 
@@ -453,7 +463,7 @@ namespace KPPAutomation {
 
                         if (item.ModuleForm.Equals(__MainDock.ActiveContent)) {
                             if (item is KPPVisionModule) {
-                                VisionProject project = ((KPPVisionModule)item).ProjectSelected;
+                                VisionProject project = (VisionProject)((KPPVisionModule)item).ProjectSelected;
                                 if (project != null) {
                                     if (keyData == Keys.F9) {
                                         project.SelectedRequest.ProcessRequest(null, true, null);
